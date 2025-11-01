@@ -32,7 +32,7 @@ localStorage.setItem("user", JSON.stringify(data.user || {}));
 
 
         // ✅ Redirect after login
-        window.location.href = "home_page/index.html";
+        window.location.href = "../home_page/index.html";
       } else {
         alert(data.message || "Invalid email or password");
       }
@@ -65,7 +65,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
       localStorage.setItem("email", data.user.email);
 
       // Redirect to homepage/dashboard
-      window.location.href = "home_page/index.html";
+      window.location.href = "../home_page/index.html";
     } else {
       alert(data.message || "Login failed");
     }

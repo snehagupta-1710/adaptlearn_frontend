@@ -214,11 +214,11 @@ body.dark-mode .profile-dropdown a:hover {
 <body>
   <!-- Sidebar -->
   <aside class="sidebar">
-    <div class="logo"><img src="images/logo.png" alt="Logo"></div>
+    <div class="logo"><img src="../images/logo.png" alt="Logo"></div>
     <ul>
-      <li><a href="home_page/index.html"><i class="ri-home-4-line"></i> Home</a></li>
-      <li><a href="course/index.html"><i class="ri-book-2-line"></i> Courses</a></li>
-      <li class="active"><a href="progress_page/index.html"><i class="ri-bar-chart-line"></i> Progress</a></li>
+      <li><a href="../home_page/index.html"><i class="ri-home-4-line"></i> Home</a></li>
+      <li><a href="../course/index.html"><i class="ri-book-2-line"></i> Courses</a></li>
+      <li class="active"><a href="../progress_page/index.html"><i class="ri-bar-chart-line"></i> Progress</a></li>
     </ul>
   </aside>
 
@@ -235,8 +235,8 @@ body.dark-mode .profile-dropdown a:hover {
     <i class="ri-arrow-down-s-line"></i>
 
     <div class="profile-dropdown" id="profileDropdown">
-      <a href="js/logout.js">Logout</a>
-      <a href="js/deleteAccount.js">Delete Account</a>
+      <a href="../js/logout.js">Logout</a>
+      <a href="../js/deleteAccount.js">Delete Account</a>
     </div>
   </div>
 </header>
@@ -292,7 +292,7 @@ themeToggle.addEventListener("click", () => {
     // Update circle with first letter
     circle.textContent = username.charAt(0).toUpperCase();
   } else {
-    window.location.href = "login&signup/login_form.html";
+    window.location.href = "../login&signup/login_form.html";
   }
 });
 
@@ -309,9 +309,9 @@ themeToggle.addEventListener("click", () => {
     });
 
 </script>
-    <script src="js/logout.js"></script>
-<script src="js/deleteAccount.js"></script>
-<script src="js/authProtect.js"></script>
-<script src="js/progressPage.js" defer></script>
+    <script src="../js/logout.js"></script>
+<script src="../js/deleteAccount.js"></script>
+<script src="../js/authProtect.js"></script>
+<script src="../js/progressPage.js" defer></script>
 </body>
 </html>
