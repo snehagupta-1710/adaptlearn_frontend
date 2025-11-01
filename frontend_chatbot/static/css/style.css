@@ -1,0 +1,107 @@
+/* ---------- Theme variables ---------- */
+:root {
+  --bg-color: #f9f9f9;
+  --container-bg: #fff;
+  --chat-bg: #fafafa;
+  --user-msg-bg: rgb(105, 2, 224,27%);
+  --bot-msg-bg: #ffffff;
+  --text-color: #000;
+}
+
+body.dark {
+  --bg-color: #1e1e1e;
+  --container-bg: #2b2b2b;
+  --chat-bg: #3a3a3a;
+  --user-msg-bg: #000000;
+  --bot-msg-bg: #555555;
+  --text-color: #fff;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: var(--bg-color);
+  color: var(--text-color);
+}
+
+.container {
+  width :97%;
+  height: 495px;
+  background: var(--container-bg);
+  padding:20px;
+  border-radius:8px;
+  box-shadow:0 2px 10px rgba(0,0,0,0.5);
+  color: #763bbb;
+}
+
+#chatbox {
+  height:350px;
+  overflow:auto;
+  border:1px solid #ddd;
+ box-shadow:0 2px 10px rgba(0,0,0,0.2);
+  padding:10px;
+  background: var(--chat-bg);
+  margin-bottom:10px;
+}
+
+.msg {
+  padding:8px 10px;
+  margin:6px 0;
+  border-radius:6px;
+  max-width:80%;
+  font-size: 16px;
+}
+
+.msg.user { background: var(--user-msg-bg); margin-left:auto; text-align:right; 
+   box-shadow:0 2px 10px rgba(0,0,0,0.2);
+   color: #000000;
+}
+.msg.bot { background: var(--bot-msg-bg); margin-right:auto; text-align:left;
+color: #000000;
+ box-shadow:0 2px 10px rgba(0,0,0,0.2);}
+
+/* Flex row for controls */
+.flex-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+#controls select,
+#controls input,
+#controls button {
+  padding:8px;
+  font-size: 14px;
+}
+
+#controls select { min-width: 180px; }
+#controls input { flex: 1; }
+#controls button { flex-shrink: 0; cursor: pointer; 
+}
+#sendBtn{
+  border: 0px solid  #763bbb;
+  box-shadow:0 2px 10px rgba(0,0,0,0.4);
+background: #763bbb;
+color: #fafafa;
+border-radius: 10%;
+width: 70px;
+}
+
+#subject{
+ border: 0px solid  #763bbb;
+  box-shadow:0 2px 10px rgba(0,0,0,0.4);
+background: #763bbb;
+color: #fafafa;
+width: 130px;
+}
+#subject option{background: white;
+color: #000;
+}
+#themeToggle{
+ border: 0px solid  #763bbb;
+  box-shadow:0 2px 10px rgba(0,0,0,0.4);
+background: #763bbb;
+color: #fafafa;
+width: 130px;
+padding:2px 4px;
+}

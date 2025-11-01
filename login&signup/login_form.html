@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdaptLearn Login Form</title>
+    <style>
+        body {
+overflow:hidden;
+            display: flex;
+            justify-content: flex-start; /* Moves content to the left */
+            align-items: center;
+            height: 100vh;
+            background:white;
+            font-family: Arial, sans-serif;
+            position: relative;
+            padding-left: 10%;
+            font-family: cursive;
+        }
+        .purple-container {
+            position: absolute;
+            right: 10%;
+            top: 0;
+            width: 430px;
+            height: 100%;
+            background: #763bbb;
+            border-top-left-radius: 200px;
+            border-top-right-radius: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            width: 300px; /* Restricts width */
+margin: 70px;
+padding: 20px;
+width: 400px;
+margin-top:-120px;
+            height: 200px;
+        }
+        .login-form {
+            background: white;
+            padding: 20px;
+	        margin: 3px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+            text-align: center;
+        }
+        .login-form h2 {
+            margin-bottom: 15px;
+        }
+        .login-form input {
+            width: 90%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #d8c5ed;
+            border-radius: 8px;
+        }
+        .login-form button {
+            width: 85%;
+            padding: 10px;
+            margin-top: 10px;
+            background: #763bbb;
+            color: rgb(254, 252, 252);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+        .login-form button:hover {
+            background: #9458d8;
+        }
+        .logo {
+            display: block;
+            margin: 0 auto 15px;
+            max-width: 150px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .forgot-password {
+            display: block;
+            text-align: right;
+            color: #763bbb;
+            padding: 0px 15px 5px 0px;
+        }
+        p {
+            margin-block-start: 1em;
+            margin-block-end: 1em;
+        }
+        a {
+            text-align: right;
+            color: #763bbb;
+            padding: 5px;
+        }
+        .image-section img{
+            margin-top:250px;
+            height:500px;
+            width:450px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="login-form">
+            <img src="/Frontend\images\logo.png" alt="Logo" class="logo">
+            <h1>Welcome</h1>
+           <form id="loginForm">
+  <input type="email" id="email" placeholder="Enter Email" required>
+  <input type="password" id="password" placeholder="Enter Password" required>
+  <a href="#" class="forgot-password">Forgot password?</a>
+  <button type="submit">Login</button>
+  <p class="dont">
+    Don't have an account?
+    <a href="/Frontend/login&signup/signup_form.html">Sign Up</a>
+  </p>
+</form>
+
+
+        </div>
+    </div>
+    <div class="purple-container">
+        <div class="image-section">
+            <img src="/Frontend\images\login.png" alt="Pregnant Woman">
+        </div>
+    </div>
+    <script src="/Frontend/js/login.js"></script>
+</body>
+</html>

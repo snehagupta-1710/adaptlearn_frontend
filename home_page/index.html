@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AdaptLearn Dashboard</title>
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+
+<style>
+
+  :root { font-size:18px; }
+  body {
+    margin: 0;
+    font-family: 'Comic Sans MS', cursive;
+    background-color: #fafafa;
+
+    transition: background 0.3s, color 0.3s;
+  }
+  body.dark-mode { background-color: #121212; color: #eaeaea; }
+
+  /* Sidebar */
+  .sidebar {
+    z-index: 1001;
+    overflow: hidden;
+    width: 180px;
+    background-color: #ffffff;
+    border-right: 2px solid rgba(0,0,0,0.1);
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+  }
+  .sidebar .logo { width:130px; height:40px; display:block; margin:0 auto 20px 10px; }
+  .sidebar .logo img { width:130px; height:40px; display:block; }
+  .sidebar ul { list-style:none; }
+  .sidebar ul li { padding: 7px 5px; cursor:pointer; border-radius:6px; margin-left:-40px; color:#333; }
+  .sidebar ul li.active a {
+    display:block;
+    border:2px solid #763bbb;
+    padding:10px 5px;
+    margin-left:-9px;
+    border-radius:6px;
+    background:#763bbb;
+    color:#fff;
+  }
+  .sidebar a { text-decoration:none; color:#000; display:block; }
+  body.dark-mode .sidebar { background:#2a2a2a; border-color:#444; }
+  body.dark-mode .sidebar a { color:#ddd; }
+  body.dark-mode .sidebar ul li.active a { border-color:#c14ee1; background:#763bbb; color:#fff; }
+
+  /* Header */
+  .header {
+    background-color:#fff;
+    border-bottom:2px solid rgba(0,0,0,0.1);
+    position:fixed; left:220px; top:0; right:0;
+    height:60px;
+    display:flex; justify-content:flex-end; align-items:center; gap:16px;
+    padding:0 20px;
+    z-index:5;
+  }
+   .img{
+    margin-top: 30px;
+    height:210px;
+    width:300px;
+  }
+ 
+  .banner{
+    height: 160px;
+  }
+  body.dark-mode .header { background:#2a2a2a; color:#fff; }
+  .header i { font-size:1.35rem; cursor:pointer; }
+  .header .t-icon { background:#763bbb; color:#fff; width:38px; height:38px; display:flex; align-items:center; justify-content:center; border-radius:50%; font-weight:700; }
+  
+  /* Profile dropdown */
+  .header .profile { display:flex; align-items:center; gap:8px; font-weight:600; cursor:pointer; position:relative; }
+  .profile-dropdown {
+    display:none;
+    position:absolute; top:40px; right:0;
+    background:#fff; border:1px solid #ddd; border-radius:6px; overflow:hidden; min-width:120px; z-index:10;
+  }
+  body.dark-mode .profile-dropdown { background:#2a2a2a; border-color:#444; }
+  .profile-dropdown a { display:block; padding:10px 14px; color:#111; text-decoration:none; transition:background 0.3s; }
+  body.dark-mode .profile-dropdown a { color:#eaeaea; }
+  .profile-dropdown a:hover { background:#d9b3ff; color:#4a148c; }
+  .profile .ri-arrow-down-s-line { transition: transform 0.3s; }
+  .profile.active .ri-arrow-down-s-line { transform: rotate(180deg); }
+
+  /* Main content */
+  .main { margin-left:220px; padding:80px 20px 20px 20px; }
+
+  /* Banner */
+  .banner { background:#d9b3ff; border-radius:12px; padding:18px 20px; display:flex; justify-content:space-between; align-items:center; position:relative; overflow:hidden; }
+  .banner h1 { margin-bottom: -20px; font-size:1.6rem; }
+  .banner p { margin:4px 0 0; }
+  .banner::before, .banner::after { content:""; position:absolute; border-radius:50%; background:rgba(255,255,255,0.45); animation:bubble 6s infinite ease-in-out; }
+  .banner::before { width:84px; height:84px; top:-28px; left:-28px; }
+  .banner::after { width:110px; height:110px; bottom:-38px; right:-38px; }
+  @keyframes bubble { 0%{transform:translateY(0)}50%{transform:translateY(-12px)}100%{transform:translateY(0)} }
+  .banner img { width:280px; position:relative; transform:translateY(-10px); z-index:2; }
+body.dark-mode .banner h1,h4{color:black;}
+ .stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.stats .box {
+  flex: 1 1 300px;
+  max-width: 350px;
+  height: 100px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+.stats .box:hover {
+  transform: translateY(-6px);
+}
+
+.stats .enroll { background: #ffd64d; }
+.stats .complete { background: #8f6bff; }
+.stats .progress { background: #ff78a8; }
+
+.stats .box * {
+  color: #fff !important;
+}
+
+.progress1{
+margin-left: 50px;
+margin-top: -50px;
+margin-bottom: 5px;
+}
+.progress1 {
+  font-size: 19px;
+  color: #333;
+  font-weight: 550;
+}
+.pro2{
+  margin-bottom: 25px;
+}
+.icon{
+  font-size: 2rem;
+  margin-right: 210px;
+  margin-top: 25px;
+}
+/* Progress bar */
+.progress-bar {
+  background: #f0ebff;
+  border-radius: 20px;
+  width: 90%;
+  margin-top: 10px;
+  overflow: hidden;
+}
+
+.progress-bar .fill {
+  background: #763bbb;
+  width: 0%;
+  margin-bottom: 20px;
+  height: 100%;
+  border-radius: 20px;
+  transition: width 1s ease;
+}
+
+/* Dark mode support */
+body.dark-mode .box {
+ 
+  color: #eee;
+}
+
+body.dark-mode .progress-bar {
+  background: #333;
+}
+
+body.dark-mode .progress-bar .fill {
+  background: #a57cff;
+}
+/* Header and profile styles */
+.header {
+  background-color: #fff;
+  border-bottom: 2px solid rgba(0,0,0,0.1);
+  position: fixed;
+  top: 0;
+  left: 220px;
+  right: 0;
+  height: 60px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16px;
+  padding: 0 20px;
+  z-index: 10;
+}
+
+.t-icon {
+  background: #763bbb;
+  color: #fff;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 18px;
+  cursor: default;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+}
+
+.profile i {
+  font-size: 18px;
+  transition: transform 0.3s;
+}
+
+.profile.active i {
+  transform: rotate(180deg);
+}
+
+
+.profile-dropdown {
+  display: none;
+  position: absolute;
+  top: 45px;
+  right: 0;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  overflow: hidden;
+  min-width: 150px;
+  z-index: 10;
+}
+
+.profile-dropdown a {
+  display: block;
+  padding: 10px 14px;
+  color: #111;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.profile-dropdown a:hover {
+  background: #d9b3ff;
+  color: #4a148c;
+}
+
+/* Dark mode */
+body.dark-mode .header {
+  background: #2a2a2a;
+  color: #fff;
+}
+
+body.dark-mode .profile-dropdown {
+  background: #2a2a2a;
+  border-color: #444;
+}
+
+body.dark-mode .profile-dropdown a {
+  color: #eaeaea;
+}
+
+body.dark-mode .profile-dropdown a:hover {
+  background: #763bbb;
+  color: #fff;
+}
+
+#userProgressSection {
+  margin-top: 30px;
+  padding: 20px;
+  background: #f9f5ff;
+  border-radius: 10px;
+}
+
+.progress-card {
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.progress-bar {
+  height: 10px;
+  background: #ddd;
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.progress-fill {
+  height: 10px;
+  background: #763bbb;
+  border-radius: 5px;
+}
+
+body.dark-mode .course-card h4{
+  color: white;
+}
+  /* Courses */
+  .courses { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
+  .course-card { background:#fff; border-radius:10px; padding:12px; box-shadow:0 6px 18px rgba(0,0,0,0.1); text-align:center; transition:transform 0.3s, box-shadow 0.3s; }
+  body.dark-mode .course-card { background:#1e1e1e; }
+  .course-card:hover { transform:translateY(-6px); box-shadow:0 8px 22px rgba(0,0,0,0.15); }
+  .course-card img { width:100%; height:120px; object-fit:cover; border-radius:8px; margin-bottom:10px; }
+  .course-card h4 { margin:6px 0; font-size:1.05rem; }
+  .course-card p { margin:0; font-size:0.95rem; opacity:0.95; }
+
+  @media (max-width:1000px){ .courses{ grid-template-columns:repeat(2,1fr); } .overview{ flex-direction:column; } }
+  @media (max-width:600px){ .sidebar{ display:none } .main{ margin-left:0 } .courses{ grid-template-columns:1fr } }
+</style>
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="logo"><img src="/Frontend/images/logo.png" alt="Logo"></div>
+    <ul>
+      <li class="active"><a href="/Frontend/home_page/index.html"><i class="ri-home-4-line"></i> Home</a></li>
+      <li><a href="/Frontend/course/index.html"><i class="ri-book-2-line"></i> Courses</a></li>
+      <li><a href="/Frontend/progress_page/index.html"><i class="ri-bar-chart-line"></i> Progress</a></li>
+    </ul>
+  </aside>
+
+  <header class="header">
+  <i id="theme-toggle" class="ri-moon-line" title="Toggle theme"></i>
+
+  <i class="ri-notification-3-line" title="Notifications"></i>
+
+  <div class="t-icon">U</div> <!-- Will show user's first letter -->
+
+  <div class="profile" id="profileBtn">
+    <span id="profileName"></span>
+    <i class="ri-arrow-down-s-line"></i>
+
+    <div class="profile-dropdown" id="profileDropdown">
+      <a href="/Frontend/js/logout.js">Logout</a>
+      <a href="/Frontend/js/deleteAccount.js">Delete Account</a>
+    </div>
+  </div>
+</header>
+
+  
+
+  <div class="main">
+    <div class="banner">
+      <div>
+        <h1>Hi, Tanvi</h1>
+        <h4>Welcome to AdaptLearn — excited to see you learning with us.</h4>
+      </div>
+      <img src="/Frontend/images/homeimg.png" alt="Student" class="img">
+    </div>
+
+    <h3 style=" margin-bottom:12px">Overview</h3>
+<section class="overview">
+  <div class="stats">
+    <div class="box enroll">
+      <i class="ri-book-open-line icon"></i>
+      <div class="progress1 pro2">0<br>Course Enrollment</div>
+    </div>
+
+    <div class="box complete">
+      <i class="ri-checkbox-circle-line icon"></i>
+      <div class="progress1 pro2">0<br>Topics Completed</div>
+    </div>
+
+    <div class="box progress">
+      <i class="ri-line-chart-line icon"></i>
+      <div class="progress1">0%<br>Progress</div>
+      <div class="progress-bar">
+        <div class="fill"></div>
+      </div>
+    </div>
+  </div>
+</section>
+    <h3 style="font-size:1.2rem; margin-bottom:12px">Popular Courses</h3>
+    <div class="courses">
+      <div class="course-card">
+        <img src="/Frontend/images/dbms.jpg" alt="Database">
+        <h4>Database</h4>
+        <p>Understand core database concepts and SQL basics.</p>
+      </div>
+      <div class="course-card">
+        <img src="/Frontend/images/python.webp" alt="Python">
+        <h4>Python Programming</h4>
+        <p>Practical Python for scripting and small projects.</p>
+      </div>
+      <div class="course-card">
+        <img src="/Frontend/images/HTMLCSS.jpg" alt="HTML CSS">
+        <h4>HTML & CSS</h4>
+        <p>Build responsive pages and modern layouts.</p>
+      </div>
+      <div class="course-card">
+        <img src="/Frontend/images/java.jpg" alt="Java">
+        <h4>Java Programming</h4>
+        <p>Object-oriented programming and core APIs.</p>
+      </div>
+    </div>
+  </div>
+
+    
+  <script>
+ 
+const themeToggle = document.getElementById("theme-toggle");
+
+themeToggle.addEventListener("click", () => {
+  document.body.classList.toggle("dark-mode");
+
+  // Change icon dynamically
+  if (document.body.classList.contains("dark-mode")) {
+    themeToggle.classList.remove("ri-moon-line");
+    themeToggle.classList.add("ri-sun-line");
+  } else {
+    themeToggle.classList.remove("ri-sun-line");
+    themeToggle.classList.add("ri-moon-line");
+  }
+});
+</script>
+
+<script>
+    const profileBtn = document.getElementById('profileBtn');
+    const dropdown = document.getElementById('profileDropdown');
+    profileBtn.addEventListener('click', () => {
+      dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+      profileBtn.classList.toggle('active');
+    });
+    window.addEventListener('click', (e) => {
+      if (!profileBtn.contains(e.target)) {
+        dropdown.style.display = 'none';
+        profileBtn.classList.remove('active');
+      }
+    });
+  </script>
+  <script>
+// ✅ Display logged-in user's name and initial
+document.addEventListener("DOMContentLoaded", () => {
+  const username = localStorage.getItem("username");
+  const bannerName = document.querySelector(".banner h1");
+  const profileNameSpan = document.querySelector("#profileName");
+  const circle = document.querySelector(".t-icon");
+
+  if (username) {
+    // Update banner greeting
+    bannerName.textContent = `Hi, ${username.split(" ")[0]}`;
+
+    // Update profile name text
+    profileNameSpan.textContent = username;
+
+    // Update circle with first letter
+    circle.textContent = username.charAt(0).toUpperCase();
+  } else {
+    window.location.href = "/Frontend/login&signup/login_form.html";
+  }
+});
+// dashboard summary loader
+async function loadSummary() {
+  const token = localStorage.getItem("token");
+  if (!token) return;
+
+  try {
+    const res = await fetch("http://localhost:5000/api/progress/summary", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    if (!res.ok) {
+      console.error("Summary fetch failed:", res.status);
+      return;
+    }
+    const data = await res.json();
+
+    document.querySelector(".enroll .progress1").innerHTML = `${data.enrollmentCount || 0}<br>Course Enrollment`;
+    document.querySelector(".complete .progress1").innerHTML = `${data.completedTopics || 0}<br>Topics Completed`;
+    document.querySelector(".progress .progress1").innerHTML = `${data.overallProgress || 0}%<br>Progress`;
+
+    const fill = document.querySelector(".fill");
+    if (fill) fill.style.width = `${data.overallProgress || 0}%`;
+  } catch (err) {
+    console.error("Error loading summary:", err);
+  }
+}
+document.addEventListener("DOMContentLoaded", loadSummary);
+loadSummary();
+</script>
+
+
+  <script src="/Frontend/js/logout.js"></script>
+<script src="/Frontend/js/deleteAccount.js"></script>
+<script src="/Frontend/js/authProtect.js"></script>
+<script src="/Frontend/js/dashboardUser.js"></script>
+
+</body>
+</html>

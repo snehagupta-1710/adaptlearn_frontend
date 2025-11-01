@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+  <title>Joins</title>
+  <style>
+      .button-class {
+    background-color:black; /* Baby pink theme */
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 8px;
+    cursor: pointer;
+    border-radius: 50px;
+    
+    /* Fixing the button position */
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    
+    /* Eye-catching effects */
+    box-shadow: 0 4px 15px rgba(255, 105, 180, 0.6);
+    transition: all 0.3s ease-in-out;
+    
+    /* Subtle animation */
+    animation: pulse 1.5s infinite;
+}
+
+/* Hover effect */
+.button-class:hover {
+    background-color: #763bbb; /* Darker pink */
+    box-shadow: 0 6px 20px rgba(177, 71, 234, 0.8);
+    transform: scale(1.1);
+}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: cursive;
+    }
+
+    li a {
+      text-decoration: none;
+      color: #000;
+    }
+    a {
+      text-decoration: none;
+      color: white;
+    }
+
+ /* Sidebar */
+  .sidebar { position: fixed; top: 0; bottom: 0; width: 220px; background-color: #fff; border-right: 2px solid rgba(0,0,0,0.1); padding: 0 0 20px 0; z-index: 1001; display: flex; flex-direction: column; }
+  .logo { height: 60px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-bottom: 10px; }
+  .logo img { width: 130px; height: 40px; display: block; }
+  .sidebar-menu { flex: 1; overflow-y: auto; -ms-overflow-style: none; scrollbar-width: none; }
+  .sidebar-menu::-webkit-scrollbar { display: none; }
+  .sidebar-menu ul { list-style: none; padding: 0 10px; }
+  .sidebar-menu ul li { border-radius: 6px; margin-bottom: 5px; }
+  .dropdown-btn { display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; cursor: pointer; background: #f7f7f7; border-radius: 6px; font-weight: bold; transition: all 0.3s; }
+  .dropdown-btn:hover { background: #763bbb; color: #fff; }
+  .dropdown-btn.active { background: #763bbb; color: #fff; }
+  .arrow { transition: transform 0.3s; }
+  .rotate { transform: rotate(90deg); }
+  .dropdown-container { display: none; padding-left: 10px; margin-top: 5px; }
+  .dropdown-container a { display: block; padding: 6px 10px; border-radius: 6px; background: #f0f0f0; color: #333; text-decoration: none; margin-bottom: 3px; transition: all 0.2s; }
+  .dropdown-container a:hover { background: #f0ebff; color: #763bbb; }
+  .dropdown-container a.active { background: #763bbb; color: #fff; }
+  body.dark-mode .sidebar { background-color: #2a2a2a; border-color: #444; color: #2a2a2a; }
+    /* Dark mode dropdown links */
+    body.dark-mode .dropdown-container a {
+      background: #333;
+      color: #ddd;
+    }
+
+    body.dark-mode .dropdown-container a:hover {
+      background: #763bbb;
+      color: #fff;
+    }
+
+    /* Active dropdown link in dark mode */
+    body.dark-mode .dropdown-container a.active {
+      background: #763bbb;
+      color: white;
+    }
+
+    /* Main Content */
+    body {
+      display: flex;
+      height: 100vh;
+      background-color: #fff;
+      color: #000;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .main-content {
+      margin-left: 240px;
+      margin-top: 10px;
+      width: calc(100% - 240px);
+      padding: 20px 40px;
+      overflow-y: auto;
+    }
+
+
+    body.dark-mode .sidebar ul li .dropdown-btn .active {
+      color: #2a2a2a;
+    }
+
+    .content h1 {
+      margin-top: 30px;
+      margin-bottom: 10px;
+    }
+.content h2{
+  padding:14px 0px;
+}
+.content h3{
+  padding:10px 0px;
+}
+.content ul li{
+  padding:4px 0px;
+}
+    .content p {
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+
+    .video-section {
+      margin: 25px 0;
+    }
+
+    .video-box {
+      border: 2px solid #af75f1;
+      border-radius: 10px;
+      padding: 10px;
+      background-color: #f6f0ff;
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+
+    .example-section {
+      margin-top: 25px;
+    }
+
+    .example-box {
+      background-color: #f6f0ff;
+      padding: 15px;
+      border-radius: 10px;
+      border: 2px solid #af75f1;
+      margin-top: 10px;
+      padding-left: 26px;
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+
+    .quiz-btn {
+      background-color: #763bbb;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 25px;
+      transition: background-color 0.3s;
+    }
+
+    .quiz-btn:hover {
+      background-color: #995edd;
+    }
+
+    /* Dark Mode */
+    body.dark-mode {
+      background-color: #1e1e1e;
+      color: #f5f5f5;
+    }
+
+    body.dark-mode header {
+      color: white;
+      background-color: #2a2a2a;
+    }
+
+    body.dark-mode .sidebar {
+      background-color: #2a2a2a;
+      border-color: #444;
+      color: #2a2a2a;
+    }
+
+    body.dark-mode .sidebar ul li.active {
+      color: #fff;
+      background: #763bbb;
+      border-color: #c14ee1;
+    }
+
+    body.dark-mode .sidebar ul li a {
+      color: #fff;
+    }
+
+    body.dark-mode .video-box,
+    body.dark-mode .example-box {
+      background-color: #2b2b2c;
+      border-color: #763bbb;
+    }
+
+    body.dark-mode .quiz-btn {
+      background-color: #763bbb;
+    }
+
+   
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    /* Dark mode adjustments for dropdown */
+    body.dark-mode .drop-btn {
+      color: #ddd;
+    }
+
+    body.dark-mode .drop-btn:hover {
+      color: #caa0ff;
+    }
+
+    body.dark-mode .sidebar .dropdown li a {
+      color: #ddd;
+    }
+
+    .active {
+      background: #763bbb;
+      color: white;
+    }
+    .header {
+  background-color: #fff;
+  border-bottom: 2px solid rgba(0,0,0,0.1);
+  position: fixed;
+  top: 0;
+  left: 220px;
+  right: 0;
+  height: 60px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16px;
+  padding: 0 20px;
+  z-index: 10;
+}
+
+.t-icon {
+  background: #763bbb;
+  color: #fff;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 18px;
+  cursor: default;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+}
+
+.profile i {
+  font-size: 18px;
+  transition: transform 0.3s;
+}
+
+.profile.active i {
+  transform: rotate(180deg);
+}
+
+.profile-dropdown {
+  display: none;
+  position: absolute;
+  top: 45px;
+  right: 0;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  overflow: hidden;
+  min-width: 150px;
+  z-index: 10;
+}
+
+.profile-dropdown a {
+  display: block;
+  padding: 10px 14px;
+  color: #111;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.profile-dropdown a:hover {
+  background: #d9b3ff;
+  color: #4a148c;
+}
+
+/* Dark mode */
+body.dark-mode .header {
+  background: #2a2a2a;
+  color: #fff;
+}
+
+body.dark-mode .profile-dropdown {
+  background: #2a2a2a;
+  border-color: #444;
+}
+
+body.dark-mode .profile-dropdown a {
+  color: #eaeaea;
+}
+
+body.dark-mode .profile-dropdown a:hover {
+  background: #763bbb;
+  color: #fff;
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+  <!-- Logo stays fixed -->
+  <div class="logo">
+    <img class="logo" src="/Frontend/images/logo.png">
+  </div>
+
+  <!-- Scrollable menu -->
+  <div class="sidebar-menu">
+    <ul>
+      <li>
+        <div class="dropdown-btn">Introduction to Database <span class="arrow">▶</span></div>
+        <div class="dropdown-container">
+          <a href="/Frontend/beginner/topic_1.html">Beginner</a>
+          <a href="/Frontend/intermediate/topic_1.html">Intermediate</a>
+          <a href="/Frontend/advanced/topic_1.html">Advanced</a>
+        </div>
+      </li>
+
+      <li>
+        <div class="dropdown-btn">DBMS <span class="arrow">▶</span></div>
+        <div class="dropdown-container">
+          <a href="/Frontend/beginner/topic_2.html">Beginner</a>
+          <a href="/Frontend/intermediate/topic_2.html">Intermediate</a>
+          <a href="/Frontend/advanced/topic_2.html">Advanced</a>
+        </div>
+      </li>
+
+      <li>
+        <div class="dropdown-btn">RDBMS <span class="arrow">▶</span></div>
+        <div class="dropdown-container">
+          <a href="/Frontend/beginner/topic_3.html">Beginner</a>
+          <a href="/Frontend/intermediate/topic_3.html">Intermediate</a>
+          <a href="/Frontend/advanced/topic_3.html">Advanced</a>
+        </div>
+      </li>
+
+      <li>
+        <div class="dropdown-btn">Types of Keys <span class="arrow">▶</span></div>
+        <div class="dropdown-container">
+          <a href="/Frontend/beginner/topic_4.html">Beginner</a>
+          <a href="/Frontend/intermediate/topic_4.html">Intermediate</a>
+          <a href="/Frontend/advanced/topic_4.html">Advanced</a>
+        </div>
+      </li>
+
+      <li>
+        <div class="dropdown-btn">SQL Commands <span class="arrow">▶</span></div>
+        <div class="dropdown-container">
+          <a href="/Frontend/beginner/topic_5.html">Beginner</a>
+          <a href="/Frontend/intermediate/topic_5.html">Intermediate</a>
+          <a href="/Frontend/advanced/topic_5.html">Advanced</a>
+        </div>
+      </li>
+
+      <li>
+        <div class="dropdown-btn active">Joins <span class="arrow">▶</span></div>
+        <div class="dropdown-container">
+          <a href="/Frontend/beginner/topic_6.html" >Beginner</a>
+          <a href="/Frontend/intermediate/topic_6.html">Intermediate</a>
+          <a href="/Frontend/advanced/topic_6.html" class="active">Advanced</a>
+        </div>
+      </li>
+
+      <li>
+        <div class="dropdown-btn">Table, Rows, Command <span class="arrow">▶</span></div>
+        <div class="dropdown-container">
+          <a href="/Frontend/beginner/topic_7.html">Beginner</a>
+          <a href="/Frontend/intermediate/topic_7.html">Intermediate</a>
+          <a href="/Frontend/advanced/topic_7.html">Advanced</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</aside>
+<header class="header">
+  <i id="theme-toggle" class="ri-moon-line" title="Toggle theme"></i>
+
+  <i class="ri-notification-3-line" title="Notifications"></i>
+
+  <div class="t-icon">U</div> <!-- Will show user's first letter -->
+
+  <div class="profile" id="profileBtn">
+    <span id="profileName"></span>
+    <i class="ri-arrow-down-s-line"></i>
+
+    <div class="profile-dropdown" id="profileDropdown">
+      <a href="/Frontend/js/logout.js">Logout</a>
+      <a href="/Frontend/js/deleteAccount.js">Delete Account</a>
+       <a href="/Frontend/home_page/index.html">Home Page</a>
+    </div>
+  </div>
+</header>
+
+   <!-- Main Content -->
+        <main class="main-content">
+      
+            <section class="content">
+               <h1>Advanced SQL Joins </h1>
+
+<p>
+In relational databases, tables store structured data independently. <b>Joins</b> are essential for combining related datasets efficiently, enabling complex analytical queries, reporting, and data integration tasks.  
+Advanced understanding of joins involves not just retrieving matching rows but also handling nulls, duplicates, large datasets, performance optimization, and query plan analysis.
+</p>
+
+<h2>Significance of Joins in SQL</h2>
+<ul>
+    <li>Enable multi-dimensional queries across normalized schemas without data duplication.</li>
+    <li>Support complex reporting, analytics, and data warehousing operations.</li>
+    <li>Reduce redundancy while maintaining referential integrity.</li>
+    <li>Facilitate optimization via indexing, partitioning, and query execution strategies.</li>
+</ul>
+
+<h2> Analogy for Understanding Joins</h2>
+<p>
+Think of each table as a dataset in a data pipeline:  
+<ul>
+<li><b>Students:</b> Core entity data (primary keys, demographics).</li>
+<li><b>Enrollments:</b> Relationship entity linking students to courses.</li>
+<li><b>Courses:</b> Metadata about courses (course IDs, details).</li>
+</ul>
+Joins act as precise connectors that combine, filter, and shape datasets without creating redundant copies, crucial for analytical and transactional operations.
+</p>
+
+<h2>Types of Joins</h2>
+
+<h3>1. INNER JOIN</h3>
+<p>
+Returns only rows with matching keys in both tables. Optimized INNER JOINs leverage indexes to minimize scanning. Ideal for transactional data integrity checks or filtering exact matches.  
+Consider using <b>EXISTS</b> or <b>IN</b> for correlated subqueries as alternatives for performance in certain large datasets.
+</p>
+<pre class="example-box">
+SELECT s.Name, c.Course_Name
+FROM Students s
+INNER JOIN Enrollments e ON s.Student_ID = e.Student_ID
+INNER JOIN Courses c ON e.Course_ID = c.Course_ID;
+</pre>
+
+<h3>2. LEFT JOIN (LEFT OUTER JOIN)</h3>
+<p>
+Returns all rows from the left table, with matched rows from the right table. Unmatched rows produce <b>NULL</b>.  
+Advanced use cases: reporting all primary entities even if no relationships exist, or generating incomplete datasets for analytics.
+</p>
+<pre class="example-box">
+SELECT s.Name, c.Course_Name
+FROM Students s
+LEFT JOIN Enrollments e ON s.Student_ID = e.Student_ID
+LEFT JOIN Courses c ON e.Course_ID = c.Course_ID;
+</pre>
+
+<h3>3. RIGHT JOIN (RIGHT OUTER JOIN)</h3>
+<p>
+Returns all rows from the right table, with matched left table rows. Useful for ensuring all reference entities are represented (e.g., all courses, including those with no enrollments).  
+Careful use advised: LEFT JOIN is usually preferred for clarity and maintainability.
+</p>
+<pre class="example-box">
+SELECT s.Name, c.Course_Name
+FROM Students s
+RIGHT JOIN Enrollments e ON s.Student_ID = e.Student_ID
+RIGHT JOIN Courses c ON e.Course_ID = c.Course_ID;
+</pre>
+
+<h3>4. FULL OUTER JOIN</h3>
+<p>
+Combines LEFT and RIGHT JOINs to return all rows from both tables, filling missing values with <b>NULL</b>. Essential for data reconciliation and auditing tasks.  
+Advanced tip: In large datasets, FULL OUTER JOINs can be expensive; consider UNION-based approaches for optimized execution.
+</p>
+<pre class="example-box">
+SELECT s.Name, c.Course_Name
+FROM Students s
+FULL OUTER JOIN Enrollments e ON s.Student_ID = e.Student_ID
+FULL OUTER JOIN Courses c ON e.Course_ID = c.Course_ID;
+</pre>
+
+<h3>5. CROSS JOIN</h3>
+<p>
+Returns the Cartesian product of two tables. Useful in combinatorial queries, scenario generation, or creating test datasets. Exercise caution: the result size = rows_left × rows_right.
+</p>
+<pre class="example-box">
+SELECT s.Name, c.Course_Name
+FROM Students s
+CROSS JOIN Courses c;
+</pre>
+
+<h2> Use Cases</h2>
+<ul>
+    <li><b>INNER JOIN:</b> Validate entity relationships and enforce referential integrity in ETL pipelines.</li>
+    <li><b>LEFT JOIN:</b> Identify unmatched records for reconciliation, null-handling, and reporting.</li>
+    <li><b>RIGHT JOIN:</b> Generate complete reference lists, especially in legacy schemas.</li>
+    <li><b>FULL OUTER JOIN:</b> Audit database completeness across multiple sources.</li>
+    <li><b>CROSS JOIN:</b> Produce all permutations for simulations, testing, or predictive models.</li>
+</ul>
+
+<h2>Performance and Optimization Tips</h2>
+<ul>
+    <li>Use indexed columns for join conditions to reduce scan time.</li>
+    <li>Analyze execution plans to identify costly joins and table scans.</li>
+    <li>Filter data before joins using <b>WHERE</b> clauses to reduce intermediate row sets.</li>
+    <li>For large datasets, consider partitioning or using temporary tables for intermediate results.</li>
+    <li>Be aware of NULL propagation in OUTER JOINs; handle with <b>COALESCE</b> or <b>ISNULL</b> where appropriate.</li>
+</ul>
+
+<div class="video-section">
+    <h2>Watch Video Explanation</h2>
+    <div class="video-box">
+        <iframe width="100%" height="315" 
+                src="https://www.youtube.com/embed/h4EQBAzW3m4" 
+                title="Advanced SQL Joins Tutorial"
+                frameborder="0"
+                allowfullscreen></iframe>
+    </div>
+</div>
+
+<div class="example-section">
+    <h2>Practical Scenario</h2>
+    <div class="example-box">
+        <p>Tables:</p>
+        <ul>
+            <li><b>Students:</b> Student_ID (PK), Name</li>
+            <li><b>Enrollments:</b> Enrollment_ID (PK), Student_ID (FK), Course_ID (FK)</li>
+            <li><b>Courses:</b> Course_ID (PK), Course_Name</li>
+        </ul>
+
+        <p>Advanced Query Examples:</p>
+        <ul>
+            <li>INNER JOIN: Extract only enrolled students and their courses efficiently using indexed keys.</li>
+            <li>LEFT JOIN: Generate reports including students with no enrollments, applying COALESCE for null handling.</li>
+            <li>RIGHT JOIN: Ensure all courses appear in analytics dashboards, even if no student enrolled.</li>
+            <li>FULL OUTER JOIN: Merge data from multiple sources for reconciliation and auditing.</li>
+            <li>CROSS JOIN: Produce combinations for scenario testing or forecasting enrollment patterns.</li>
+        </ul>
+    </div>
+</div>
+
+                <button class="quiz-btn"><a href="/Frontend/quiz/quiz_6.html">Take Quiz ▶</a></button>
+            </section>
+        </main>
+  </div>
+
+ <button onclick="window.open('http://127.0.0.1:5000/', '_blank')">
+<img src="/Frontend/images/ai.png" class="button-class">
+</button>
+<script>
+ 
+const themeToggle = document.getElementById("theme-toggle");
+
+themeToggle.addEventListener("click", () => {
+  document.body.classList.toggle("dark-mode");
+
+  // Change icon dynamically
+  if (document.body.classList.contains("dark-mode")) {
+    themeToggle.classList.remove("ri-moon-line");
+    themeToggle.classList.add("ri-sun-line");
+  } else {
+    themeToggle.classList.remove("ri-sun-line");
+    themeToggle.classList.add("ri-moon-line");
+  }
+});
+ const profileBtn = document.getElementById('profileBtn');
+    const dropdown = document.getElementById('profileDropdown');
+    profileBtn.addEventListener('click', () => {
+      dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+      profileBtn.classList.toggle('active');
+    });
+    window.addEventListener('click', (e) => {
+      if (!profileBtn.contains(e.target)) {
+        dropdown.style.display = 'none';
+        profileBtn.classList.remove('active');
+      }
+    });
+    document.addEventListener("DOMContentLoaded", () => {
+  const username = localStorage.getItem("username");
+  const profileNameSpan = document.querySelector("#profileName");
+  const circle = document.querySelector(".t-icon");
+
+  if (username) {
+
+    // Update profile name text
+    profileNameSpan.textContent = username;
+
+    // Update circle with first letter
+    circle.textContent = username.charAt(0).toUpperCase();
+  } else {
+    window.location.href = "/Frontend/login&signup/login_form.html";
+  }
+});
+
+    // Dropdown toggle functionality
+    const dropdowns = document.querySelectorAll('.dropdown-btn');
+    dropdowns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const container = btn.nextElementSibling;
+        const arrow = btn.querySelector('.arrow');
+
+        container.style.display = container.style.display === 'block' ? 'none' : 'block';
+        arrow.classList.toggle('rotate');
+      });
+    });
+  </script>
+ <script src="/Frontend/js/logout.js"></script>
+<script src="/Frontend/js/deleteAccount.js"></script>
+<script src="/Frontend/js/authProtect.js"></script>
+<script src="/Frontend/js/dashboardUser.js"></script>
+
+</body>
+</html>

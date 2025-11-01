@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+  <title>Database Management System (DBMS)</title>
+  <style>
+     .button-class {
+    background-color:black; /* Baby pink theme */
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 8px;
+    cursor: pointer;
+    border-radius: 50px;
+    
+    /* Fixing the button position */
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    
+    /* Eye-catching effects */
+    box-shadow: 0 4px 15px rgba(255, 105, 180, 0.6);
+    transition: all 0.3s ease-in-out;
+    
+    /* Subtle animation */
+    animation: pulse 1.5s infinite;
+}
+
+/* Hover effect */
+.button-class:hover {
+    background-color: #763bbb; /* Darker pink */
+    box-shadow: 0 6px 20px rgba(177, 71, 234, 0.8);
+    transform: scale(1.1);
+}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: cursive;
+    }
+
+    li a {
+      text-decoration: none;
+      color: #000;
+    }
+    a {
+      text-decoration: none;
+      color: white;
+    }
+
+ /* Sidebar */
+  .sidebar { position: fixed; top: 0; bottom: 0; width: 220px; background-color: #fff; border-right: 2px solid rgba(0,0,0,0.1); padding: 0 0 20px 0; z-index: 1001; display: flex; flex-direction: column; }
+  .logo { height: 60px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-bottom: 10px; }
+  .logo img { width: 130px; height: 40px; display: block; }
+  .sidebar-menu { flex: 1; overflow-y: auto; -ms-overflow-style: none; scrollbar-width: none; }
+  .sidebar-menu::-webkit-scrollbar { display: none; }
+  .sidebar-menu ul { list-style: none; padding: 0 10px; }
+  .sidebar-menu ul li { border-radius: 6px; margin-bottom: 5px; }
+  .dropdown-btn { display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; cursor: pointer; background: #f7f7f7; border-radius: 6px; font-weight: bold; transition: all 0.3s; }
+  .dropdown-btn:hover { background: #763bbb; color: #fff; }
+  .dropdown-btn.active { background: #763bbb; color: #fff; }
+  .arrow { transition: transform 0.3s; }
+  .rotate { transform: rotate(90deg); }
+  .dropdown-container { display: none; padding-left: 10px; margin-top: 5px; }
+  .dropdown-container a { display: block; padding: 6px 10px; border-radius: 6px; background: #f0f0f0; color: #333; text-decoration: none; margin-bottom: 3px; transition: all 0.2s; }
+  .dropdown-container a:hover { background: #f0ebff; color: #763bbb; }
+  .dropdown-container a.active { background: #763bbb; color: #fff; }
+  body.dark-mode .sidebar { background-color: #2a2a2a; border-color: #444; color: #2a2a2a; }
+
+    /* Dark mode dropdown links */
+    body.dark-mode .dropdown-container a {
+      background: #333;
+      color: #ddd;
+    }
+
+    body.dark-mode .dropdown-container a:hover {
+      background: #763bbb;
+      color: #fff;
+    }
+
+    /* Active dropdown link in dark mode */
+    body.dark-mode .dropdown-container a.active {
+      background: #763bbb;
+      color: white;
+    }
+
+    /* Main Content */
+    body {
+      display: flex;
+      height: 100vh;
+      background-color: #fff;
+      color: #000;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .main-content {
+      margin-left: 240px;
+      margin-top: 10px;
+      width: calc(100% - 240px);
+      padding: 20px 40px;
+      overflow-y: auto;
+    }
+
+   .header {
+  background-color: #fff;
+  border-bottom: 2px solid rgba(0,0,0,0.1);
+  position: fixed;
+  top: 0;
+  left: 220px;
+  right: 0;
+  height: 60px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16px;
+  padding: 0 20px;
+  z-index: 10;
+}
+
+.t-icon {
+  background: #763bbb;
+  color: #fff;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 18px;
+  cursor: default;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+}
+
+.profile i {
+  font-size: 18px;
+  transition: transform 0.3s;
+}
+
+.profile.active i {
+  transform: rotate(180deg);
+}
+
+.profile-dropdown {
+  display: none;
+  position: absolute;
+  top: 45px;
+  right: 0;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  overflow: hidden;
+  min-width: 150px;
+  z-index: 10;
+}
+
+.profile-dropdown a {
+  display: block;
+  padding: 10px 14px;
+  color: #111;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.profile-dropdown a:hover {
+  background: #d9b3ff;
+  color: #4a148c;
+}
+
+/* Dark mode */
+body.dark-mode .header {
+  background: #2a2a2a;
+  color: #fff;
+}
+
+body.dark-mode .profile-dropdown {
+  background: #2a2a2a;
+  border-color: #444;
+}
+
+body.dark-mode .profile-dropdown a {
+  color: #eaeaea;
+}
+
+body.dark-mode .profile-dropdown a:hover {
+  background: #763bbb;
+  color: #fff;
+}
+
+    body.dark-mode .sidebar ul li .dropdown-btn .active {
+      color: #2a2a2a;
+    }
+
+    .content h1 {
+      margin-top: 30px;
+      margin-bottom: 10px;
+    }
+.content h2,h3{
+  padding: 14px 0px;
+}
+    .content p {
+      margin-bottom: 15px;
+      padding: 5px 0px;
+      line-height: 1.6;
+    }
+
+    .video-section {
+      margin: 25px 0;
+    }
+
+    .video-box {
+      border: 2px solid #af75f1;
+      border-radius: 10px;
+      padding: 10px;
+      background-color: #f6f0ff;
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+
+    .example-section {
+      margin-top: 25px;
+    }
+
+    .example-box {
+      background-color: #f6f0ff;
+      padding: 15px;
+      border-radius: 10px;
+      border: 2px solid #af75f1;
+      margin-top: 10px;
+      padding-left: 26px;
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+
+    .quiz-btn {
+      background-color: #763bbb;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 25px;
+      transition: background-color 0.3s;
+    }
+
+    .quiz-btn:hover {
+      background-color: #995edd;
+    }
+
+    /* Dark Mode */
+    body.dark-mode {
+      background-color: #1e1e1e;
+      color: #f5f5f5;
+    }
+
+    body.dark-mode header {
+      color: white;
+      background-color: #2a2a2a;
+    }
+
+    body.dark-mode .sidebar {
+      background-color: #2a2a2a;
+      border-color: #444;
+      color: #2a2a2a;
+    }
+
+    body.dark-mode .sidebar ul li.active {
+      color: #fff;
+      background: #763bbb;
+      border-color: #c14ee1;
+    }
+
+    body.dark-mode .sidebar ul li a {
+      color: #fff;
+    }
+
+    body.dark-mode .video-box,
+    body.dark-mode .example-box {
+      background-color: #2b2b2c;
+      border-color: #763bbb;
+    }
+
+    body.dark-mode .quiz-btn {
+      background-color: #763bbb;
+    }
+
+  
+    .rotate {
+      transform: rotate(90deg);
+    }
+
+    /* Dropdown Menu */
+    .dropdown-container {
+      display: none;
+      padding-left: 15px;
+      margin-top: 5px;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .dropdown-container a {
+      display: block;
+      padding: 8px 12px;
+      background: #f0f0f0;
+      border-radius: 6px;
+      margin: 4px 0;
+      text-decoration: none;
+      color: #333;
+      transition: all 0.2s;
+    }
+
+    .dropdown-container a:hover {
+      background: #e3d4fa;
+      color: #763bbb;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    /* Dark mode adjustments for dropdown */
+    body.dark-mode .drop-btn {
+      color: #ddd;
+    }
+
+    body.dark-mode .drop-btn:hover {
+      color: #caa0ff;
+    }
+
+    body.dark-mode .sidebar .dropdown li a {
+      color: #ddd;
+    }
+
+    .active {
+      background: #763bbb;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+  <!-- Logo stays fixed -->
+  <div class="logo">
+    <img class="logo" src="/Frontend/images/logo.png">
+  </div>
+
+  <!-- Scrollable menu -->
+  <div class="sidebar-menu">
+    <ul>
+      <li>
+        <div class="dropdown-btn">Introduction to Database <span class="arrow">▶</span></div>
+        <div class="dropdown-container">
+          <a href="/Frontend/beginner/topic_1.html">Beginner</a>
+          <a href="/Frontend/intermediate/topic_1.html">Intermediate</a>
+          <a href="/Frontend/advanced/topic_1.html">Advanced</a>
+        </div>
+      </li>
+
+      <li>
+        <div class="dropdown-btn active">DBMS <span class="arrow">▶</span></div>
+        <div class="dropdown-container">
+          <a href="/Frontend/beginner/topic_2.html" class="active">Beginner</a>
+          <a href="/Frontend/intermediate/topic_2.html">Intermediate</a>
+          <a href="/Frontend/advanced/topic_2.html">Advanced</a>
+        </div>
+      </li>
+
+      <li>
+        <div class="dropdown-btn">RDBMS <span class="arrow">▶</span></div>
+        <div class="dropdown-container">
+          <a href="/Frontend/beginner/topic_3.html">Beginner</a>
+          <a href="/Frontend/intermediate/topic_3.html">Intermediate</a>
+          <a href="/Frontend/advanced/topic_3.html">Advanced</a>
+        </div>
+      </li>
+
+      <li>
+        <div class="dropdown-btn">Types of Keys <span class="arrow">▶</span></div>
+        <div class="dropdown-container">
+          <a href="/Frontend/beginner/topic_4.html">Beginner</a>
+          <a href="/Frontend/intermediate/topic_4.html">Intermediate</a>
+          <a href="/Frontend/advanced/topic_4.html">Advanced</a>
+        </div>
+      </li>
+
+      <li>
+        <div class="dropdown-btn">SQL Commands <span class="arrow">▶</span></div>
+        <div class="dropdown-container">
+          <a href="/Frontend/beginner/topic_5.html">Beginner</a>
+          <a href="/Frontend/intermediate/topic_5.html">Intermediate</a>
+          <a href="/Frontend/advanced/topic_5.html">Advanced</a>
+        </div>
+      </li>
+
+      <li>
+        <div class="dropdown-btn">Joins <span class="arrow">▶</span></div>
+        <div class="dropdown-container">
+          <a href="/Frontend/beginner/topic_6.html">Beginner</a>
+          <a href="/Frontend/intermediate/topic_6.html">Intermediate</a>
+          <a href="/Frontend/advanced/topic_6.html">Advanced</a>
+        </div>
+      </li>
+
+      <li>
+        <div class="dropdown-btn">Table, Rows, Command <span class="arrow">▶</span></div>
+        <div class="dropdown-container">
+          <a href="/Frontend/beginner/topic_7.html">Beginner</a>
+          <a href="/Frontend/intermediate/topic_7.html">Intermediate</a>
+          <a href="/Frontend/advanced/topic_7.html">Advanced</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</aside>
+
+<header class="header">
+  <i id="theme-toggle" class="ri-moon-line" title="Toggle theme"></i>
+
+  <i class="ri-notification-3-line" title="Notifications"></i>
+
+  <div class="t-icon">U</div> <!-- Will show user's first letter -->
+
+  <div class="profile" id="profileBtn">
+    <span id="profileName"></span>
+    <i class="ri-arrow-down-s-line"></i>
+
+    <div class="profile-dropdown" id="profileDropdown">
+      <a href="/Frontend/js/logout.js">Logout</a>
+      <a href="/Frontend/js/deleteAccount.js">Delete Account</a>
+      <a href="/Frontend/home_page/index.html">Home Page</a>
+    </div>
+  </div>
+</header>
+
+   
+        <!-- Main Content -->
+        <main class="main-content">
+         
+            <section class="content">
+                <h1>Database Management System (DBMS)</h1>
+
+                <h2>1) Meaning of DBMS</h2>
+                <p>
+                  A <b>Database Management System (DBMS)</b> is software that helps you <b>store, organize, and manage data</b> in a database.
+                  You can think of it as a <b>tool</b> that acts as a <b>bridge between the user and the database</b>.
+                  Without a DBMS, data would often be kept as random files that are hard to search or update.
+                </p>
+                <p><b>In simple words:</b> A DBMS is a computer program that helps you handle large amounts of information easily — like a teacher organizing all students’ marks and attendance using a computer system instead of notebooks.</p>
+
+                <h2>2)  Definition</h2>
+                <p>
+                  A DBMS allows users and applications to <b>add, delete, update, and retrieve data</b> using commands rather than manual file handling.
+                  It manages how data is stored on disks, enforces rules about data accuracy, and provides tools for backup and recovery.
+                </p>
+                <p><b>Definition:</b> A DBMS is software used to store, manage, and retrieve data quickly and reliably.</p>
+
+                <h2>3) Features of DBMS </h2>
+                <ul>
+                  <li><b>Data Storage and Retrieval:</b> You can store large amounts of data and get it back quickly when needed.</li>
+                  <li><b>Data Security:</b> DBMS protects data from unauthorized access using passwords or permissions.</li>
+                  <li><b>Data Consistency:</b> Ensures all users see accurate and up-to-date data, even when many use it at once.</li>
+                  <li><b>Backup and Recovery:</b> DBMS can create backups and restore data after crashes or errors.</li>
+                  <li><b>Data Independence:</b> The way data is stored is independent from the applications that use it — changing storage won't break apps.</li>
+                  <li><b>Multi-User Access:</b> Multiple users can use the database at the same time without causing data corruption.</li>
+                  <li><b>Reduced Data Redundancy:</b> Stores data only once and links it where needed to avoid duplicates.</li>
+                  <li><b>Data Manipulation:</b> Tools and query languages (like SQL) let you search, filter, and change data easily.</li>
+                </ul>
+
+                <h2>4) Uses of DBMS</h2>
+                <p>DBMS is used in almost every field where data needs managed safely and efficiently. Some examples:</p>
+                <ul>
+                  <li><b>Education:</b> Manage student records, attendance, marks, and course registration.</li>
+                  <li><b>Banking:</b> Track customers, accounts, transactions, and balances securely.</li>
+                  <li><b>E-commerce / Online Shopping:</b> Manage products, customers, orders, and payments.</li>
+                  <li><b>Healthcare / Hospitals:</b> Store patient records, prescriptions, appointments, and billing.</li>
+                  <li><b>Government:</b> Keep citizen records, taxes, and official documentation.</li>
+                  <li><b>Companies:</b> For employee data, payroll, inventory, and reporting.</li>
+                </ul>
+
+                <h2>5) Popular DBMS Examples </h2>
+                <p>There are many DBMS systems. Some use the relational model (tables) and SQL; others use NoSQL models for flexible or large-scale data.</p>
+                <ul>
+                  <li><b>Relational (SQL) databases:</b> MySQL, Oracle Database, Microsoft SQL Server, PostgreSQL. These use tables (rows & columns) and SQL (Structured Query Language).</li>
+                  <li><b>NoSQL databases:</b> MongoDB, Cassandra, CouchDB, Redis. These are used for unstructured or semi-structured data and large-scale systems.</li>
+                  <li><b>Lightweight / Embedded:</b> SQLite — used in mobile apps and small projects.</li>
+                </ul>
+
+                <h2>6) Real-life Examples </h2>
+                <div class="example-box">
+                  <p><b>Example 1 — Library Management System:</b></p>
+                  <ul>
+                    <li><b>Books Table:</b> Book_ID, Title, Author, Genre</li>
+                    <li><b>Members Table:</b> Member_ID, Name, Membership_Date</li>
+                    <li><b>Borrowings Table:</b> Borrow_ID, Book_ID, Member_ID, Borrow_Date, Return_Date</li>
+                  </ul>
+                  <p>Using a DBMS, librarians can easily add new books, track which books are borrowed or returned, and generate reports about library usage quickly.</p>
+
+                  <p><b>Example 2 — School Database:</b></p>
+                  <p>Stores details of students (name, roll number, marks, attendance) so teachers can update marks or attendance without searching paper files.</p>
+
+                  <p><b>Example 3 — Bank Database:</b></p>
+                  <p>Keeps information about customers, accounts, balances, and transactions. The DBMS helps record deposits and withdrawals accurately and securely.</p>
+
+                  <p><b>Example 4 — Online Food Delivery App (like Zomato / Swiggy):</b></p>
+                  <p>DBMS stores restaurant menus, user orders, delivery addresses and order history. When you place an order, the DBMS finds your data and updates the order status in real-time.</p>
+                </div>
+
+                <h2>7) Types of DBMS</h2>
+                <p>DBMS can be classified depending on how they organize data. Below are the main types with simple explanations and examples.</p>
+
+                <h3>7.1 Hierarchical DBMS</h3>
+                <p><b>Meaning:</b> Data is stored in a tree-like structure. Each record has one parent and many children (one-to-many).</p>
+                <p><b>Looks like:</b></p>
+                <pre style="background:#f6f0ff;padding:8px;border-radius:6px;border:2px solid #af75f1;">
+Parent
+ ├── Child 1
+ │    ├── Sub-child 1
+ │    └── Sub-child 2
+ └── Child 2
+                </pre>
+                <p><b>Example:</b> Company structure — CEO (parent) → Managers (children) → Employees (sub-children).</p>
+                <p><b>Advantages:</b> Fast access for simple, fixed relationships.</p>
+                <p><b>Disadvantages:</b> Not flexible for complex relationships; changes are hard to make.</p>
+                <p><b>Example system:</b> IBM IMS.</p>
+
+                <h3>7.2 Network DBMS</h3>
+                <p><b>Meaning:</b> Uses a graph-like structure where records (nodes) are connected by links and can have many parents and many children (many-to-many).</p>
+                <p><b>Example:</b> College database — a student can enroll in many courses, and a course can have many students.</p>
+                <p><b>Advantages:</b> Supports complex many-to-many relationships.</p>
+                <p><b>Disadvantages:</b> More complex to design and maintain.</p>
+                <p><b>Example systems:</b> IDMS, TurboIMAGE.</p>
+
+                <h3>7.3 Relational DBMS (RDBMS)</h3>
+                <p><b>Meaning:</b> Stores data in tables made of rows and columns. Tables are related using keys. This is the most widely used model today.</p>
+                <p><b>Example table:</b></p>
+                <pre style="background:#f6f0ff;padding:8px;border-radius:6px;border:2px solid #af75f1;">
+| Student_ID | Name | Class | Marks |
+|------------|------|-------|-------|
+| 101        | Asha | 10    | 88    |
+| 102        | Ravi | 10    | 92    |
+                </pre>
+                <p><b>Advantages:</b> Easy to use, supports SQL, good for consistency and avoiding duplicate data.</p>
+                <p><b>Disadvantages:</b> Can be slower for very large or highly unstructured data.</p>
+                <p><b>Example systems:</b> MySQL, Oracle, PostgreSQL, Microsoft SQL Server.</p>
+
+                <h3>7.4 Object-Oriented DBMS (OODBMS)</h3>
+                <p><b>Meaning:</b> Stores data as objects (like in OOP languages). Each object contains data and methods.</p>
+                <p><b>Example:</b> Video game characters stored as objects with properties (name, level, score) and methods (move, attack).</p>
+                <p><b>Advantages:</b> Works well for complex data and modern applications (multimedia, AI).</p>
+                <p><b>Disadvantages:</b> More complex and less commonly used than relational databases.</p>
+                <p><b>Example systems:</b> db4o, ObjectDB, Versant ODBMS.</p>
+
+                <h2>8) Advantages of DBMS </h2>
+                <p>Using a DBMS gives many benefits. Here are the main ones explained simply:</p>
+                <ul>
+                  <li><b>Better Data Organization:</b> Data is stored in a structured way so it’s easy to search and manage.</li>
+                  <li><b>Data Security:</b> Only authorized users can access or modify data — protects sensitive information.</li>
+                  <li><b>Data Consistency:</b> Everyone sees the same, up-to-date data — no confusion from old copies.</li>
+                  <li><b>Reduced Data Redundancy:</b> Data stored once and referenced where needed — avoids duplicate records.</li>
+                  <li><b>Data Sharing and Multi-User Access:</b> Multiple users can work together on the same data safely and concurrently.</li>
+                  <li><b>Backup and Recovery:</b> DBMS can automatically back up data and restore it if something goes wrong.</li>
+                  <li><b>Data Independence:</b> Applications remain stable even if internal storage changes.</li>
+                  <li><b>Improved Data Access:</b> Use SQL to find and filter data quickly (e.g., "all students scoring above 90").</li>
+                  <li><b>Easy Maintenance:</b> Fix or update data centrally, not in many scattered files.</li>
+                  <li><b>Integrity and Accuracy:</b> DBMS enforces rules (constraints) so data stays correct (e.g., no negative ages).</li>
+                </ul>
+
+                <h2>9) Disadvantages of DBMS </h2>
+                <p>DBMS are powerful but have downsides. Here are the key disadvantages explained:</p>
+                <ul>
+                  <li><b>High Cost:</b> Setup requires software, hardware, and trained staff — can be expensive.</li>
+                  <li><b>Complexity:</b> DBMS systems can be hard to design and manage for beginners.</li>
+                  <li><b>Requires Technical Knowledge:</b> You need to learn SQL and database concepts to use DBMS effectively.</li>
+                  <li><b>Performance Issues:</b> Very large databases or many simultaneous users can slow performance if not optimized.</li>
+                  <li><b>Risk of Data Loss or Hacking:</b> Without strong security and backups, data can be lost or stolen.</li>
+                  <li><b>Hardware / Software Requirements:</b> Powerful servers and reliable software are often needed for larger systems.</li>
+                </ul>
+
+                <h2>10) Quick Summary</h2>
+                <p>
+                  <b>Database</b> = collection of related data. <br>
+                  <b>DBMS</b> = software to manage that data (store, retrieve, secure, and update it).
+                </p>
+
+                <h2>11) Extra Tips for Beginners</h2>
+                <ul>
+                  <li>Start with the basics of <b>SQL</b> — learn commands like <code>SELECT</code>, <code>INSERT</code>, <code>UPDATE</code>, and <code>DELETE</code>.</li>
+                  <li>Practice with a small DBMS like <b>SQLite</b> or <b>MySQL</b> on your computer.</li>
+                  <li>Try building a simple project (e.g., a library or student records app) to apply what you learn.</li>
+                  <li>Focus on understanding tables, keys (primary/foreign), and basic queries before advanced topics.</li>
+                </ul>
+
+                <div class="video-section">
+                    <h2>Watch Video Explanation</h2><br>
+                    <div class="video-box">
+                        <iframe width="100%" height="315" 
+                                src="https://www.youtube.com/embed/6Iu45VZGQDk"
+                                title="DBMS Explanation"
+                                frameborder="0"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+
+                <div class="tip-section"><br>
+                    <h2>Tip for Beginners</h2><br>
+                    <p>
+                        Start by learning <b>SQL (Structured Query Language)</b>, the standard language for DBMS. 
+                        With SQL, you can:
+                    </p>
+                    <ul>
+                        <li>Create tables and define their structure.</li>
+                        <li>Insert, update, or delete data easily.</li>
+                        <li>Search and filter data with simple commands.</li>
+                        <li>Generate reports to analyze data efficiently.</li>
+                    </ul>
+                    <p>
+                        Even basic commands like <code>SELECT</code> and <code>INSERT</code> can help you interact with your database effectively.
+                    </p>
+                </div>
+
+                <button class="quiz-btn"><a href="/Frontend/quiz/quiz_2.html">Take Quiz ▶</a></button>
+            </section>
+        </main>
+  </div>
+<button onclick="window.open('http://127.0.0.1:5000/', '_blank')">
+<img src="/Frontend/images/ai.png" class="button-class">
+</button>
+ <script>
+ 
+const themeToggle = document.getElementById("theme-toggle");
+
+themeToggle.addEventListener("click", () => {
+  document.body.classList.toggle("dark-mode");
+
+  // Change icon dynamically
+  if (document.body.classList.contains("dark-mode")) {
+    themeToggle.classList.remove("ri-moon-line");
+    themeToggle.classList.add("ri-sun-line");
+  } else {
+    themeToggle.classList.remove("ri-sun-line");
+    themeToggle.classList.add("ri-moon-line");
+  }
+});
+ const profileBtn = document.getElementById('profileBtn');
+    const dropdown = document.getElementById('profileDropdown');
+    profileBtn.addEventListener('click', () => {
+      dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+      profileBtn.classList.toggle('active');
+    });
+    window.addEventListener('click', (e) => {
+      if (!profileBtn.contains(e.target)) {
+        dropdown.style.display = 'none';
+        profileBtn.classList.remove('active');
+      }
+    });
+    document.addEventListener("DOMContentLoaded", () => {
+  const username = localStorage.getItem("username");
+  const profileNameSpan = document.querySelector("#profileName");
+  const circle = document.querySelector(".t-icon");
+
+  if (username) {
+
+    // Update profile name text
+    profileNameSpan.textContent = username;
+
+    // Update circle with first letter
+    circle.textContent = username.charAt(0).toUpperCase();
+  } else {
+    window.location.href = "/Frontend/login&signup/login_form.html";
+  }
+});
+
+    // Dropdown toggle functionality
+    const dropdowns = document.querySelectorAll('.dropdown-btn');
+    dropdowns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const container = btn.nextElementSibling;
+        const arrow = btn.querySelector('.arrow');
+
+        container.style.display = container.style.display === 'block' ? 'none' : 'block';
+        arrow.classList.toggle('rotate');
+      });
+    });
+  </script>
+ <script src="/Frontend/js/logout.js"></script>
+<script src="/Frontend/js/deleteAccount.js"></script>
+<script src="/Frontend/js/authProtect.js"></script>
+<script src="/Frontend/js/dashboardUser.js"></script>
+
+
+</body>
+</html>

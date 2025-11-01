@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AdaptLearn Dashboard</title>
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet" />
+<style>
+  button a{
+    text-decoration: none;
+    color:white;
+  }
+  :root { font-size:18px; }
+  body {
+    margin: 0;
+    font-family: 'Comic Sans MS', cursive;
+    background-color: #fafafa;
+    color: #111;
+    transition: background 0.3s, color 0.3s;
+  }
+  body.dark-mode { background-color: #121212; color: #eaeaea; }
+
+  
+  /* Sidebar */
+  .sidebar {
+    z-index: 1001;
+    overflow: hidden;
+    width: 180px;
+    background-color: #ffffff;
+    border-right: 2px solid rgba(0,0,0,0.1);
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+  }
+  .sidebar .logo { width:130px; height:40px; display:block; margin:0 auto 20px 10px; }
+  .sidebar .logo img { width:130px; height:40px; display:block; }
+  .sidebar ul { list-style:none; }
+  .sidebar ul li { padding: 7px 5px; cursor:pointer; border-radius:6px; margin-left:-40px; color:#333; }
+  .sidebar ul li.active a {
+    display:block;
+    border:2px solid #763bbb;
+    padding:10px 5px;
+    margin-left:-9px;
+    border-radius:6px;
+    background:#763bbb;
+    color:#fff;
+  }
+  .sidebar a { text-decoration:none; color:#000; display:block; }
+  body.dark-mode .sidebar { background:#2a2a2a; border-color:#444; }
+  body.dark-mode .sidebar a { color:#ddd; }
+  body.dark-mode .sidebar ul li.active a { border-color:#c14ee1; background:#763bbb; color:#fff; }
+
+  /* Header */
+  .header {
+    position: fixed; left:220px; top:0; right:0;
+    height:60px; display:flex; justify-content:flex-end; align-items:center; gap:16px;
+    background:white; padding:0; box-shadow:none; z-index:5;
+    border-bottom: 2px solid rgba(0,0,0,0.1);
+  }
+  body.dark-mode .header {
+    background:#2a2a2a; border-color:#444;
+  }
+  .header i { font-size:1.35rem; cursor:pointer; }
+  .header .t-icon { background:#ac8ffd; color:#fff; width:38px; height:38px; display:flex; align-items:center; justify-content:center; border-radius:50%; font-weight:700; }
+  .header .profile { display:flex; align-items:center; gap:8px; font-weight:600; cursor:pointer; position:relative; }
+  .profile-dropdown {
+    display:none;
+    position:absolute; top:40px; right:0;
+    background:#fff; border:1px solid #ddd; border-radius:6px; overflow:hidden; min-width:120px; z-index:10;
+  }
+  body.dark-mode .profile-dropdown { background:#2a2a2a; border-color:#444; }
+  .profile-dropdown a { display:block; padding:10px 14px; color:#111; text-decoration:none; transition:background 0.3s; }
+  body.dark-mode .profile-dropdown a { color:#eaeaea; }
+  .profile-dropdown a:hover { background:#d9b3ff; color:#4a148c; }
+  .profile .ri-arrow-down-s-line { transition: transform 0.3s; }
+  .profile.active .ri-arrow-down-s-line { transform: rotate(180deg); }
+
+  /* Main Content */
+  .main { margin-left:220px; padding:60px 20px 20px 20px; }
+
+  h3 { font-size:1.3rem; margin-bottom:16px; }
+
+  /* Courses Grid */
+  .courses {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 courses per row */
+    gap: 24px;
+  }
+  .course-card {
+    background:#fff; border-radius:12px; padding:16px;
+    box-shadow:0 6px 20px rgba(0,0,0,0.08);
+    text-align:center; transition:transform 0.3s, box-shadow 0.3s;
+    display:flex; flex-direction:column; justify-content:space-between;
+  }
+  body.dark-mode .course-card { background:#1e1e1e; }
+  .course-card:hover { transform:translateY(-6px); box-shadow:0 8px 22px rgba(0,0,0,0.15); }
+  .course-card img { width:100%; height:140px; object-fit:cover; border-radius:10px; margin-bottom:12px; }
+  .course-card h4 { margin:8px 0; font-size:1.1rem; font-weight:600; }
+  .course-card p { margin:0 0 14px; font-size:0.95rem; opacity:0.9; flex-grow:1; }
+  .join-btn { background:#8f6bff; color:#fff; border:none; padding:10px 18px; border-radius:8px; cursor:pointer; font-weight:bold; font-size:0.95rem; transition: background 0.3s; }
+  .join-btn:hover { background:#4a148c; }
+
+  /* Responsive */
+  @media (max-width:1200px) { .courses { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width:700px) { .courses { grid-template-columns: 1fr; } }
+
+</style>
+</head>
+<body>
+  <!-- Sidebar -->
+   <aside class="sidebar">
+    <div class="logo"><img src="/Frontend/images/logo.png" alt="Logo"></div>
+    <ul>
+      <li><a href="/Frontend/home_page/index.html"><i class="ri-home-4-line"></i> Home</a></li>
+      <li class="active"><a href="/Frontend/course/index.html"><i class="ri-book-2-line"></i> Courses</a></li>
+      <li><a href="/Frontend/progress_page/index.html"><i class="ri-bar-chart-line"></i> Progress</a></li>
+    </ul>
+  </aside>
+  <!-- Header -->
+ <header class="header">
+  <i id="theme-toggle" class="ri-moon-line" title="Toggle theme"></i>
+
+  <i class="ri-notification-3-line" title="Notifications"></i>
+
+  <div class="t-icon">U</div> <!-- Will show user's first letter -->
+
+  <div class="profile" id="profileBtn">
+    <span id="profileName"></span>
+    <i class="ri-arrow-down-s-line"></i>
+
+    <div class="profile-dropdown" id="profileDropdown">
+      <a href="/Frontend/js/logout.js">Logout</a>
+      <a href="/Frontend/js/deleteAccount.js">Delete Account</a>
+    </div>
+  </div>
+</header>
+
+  <!-- Main Content -->
+  <div class="main">
+    <h3>Our Courses</h3>
+    <div class="courses">
+      <div class="course-card">
+        <img src="/Frontend/images/dbms.jpg" alt="Data Fundamentals">
+        <h4>Database</h4>
+        <p>Understand core database concepts and SQL basics.</p>
+        <button class="join-btn" onclick="enrollCourse('Database')">
+          <a href="/Frontend/beginner/topic_1.html">Join Now</a></button>
+          <script src="/Frontend/js/courseActions.js"></script>
+      </div>
+      <div class="course-card">
+        <img src="/Frontend/images/python.webp" alt="Python Programming">
+        <h4>Python Programming</h4>
+        <p>Practical Python for scripting and small projects.</p>
+        <button class="join-btn"onclick="enrollCourse('Python Programming')">Join Now</button>
+      </div>
+      <div class="course-card">
+        <img src="/Frontend/images/HTMLCSS.jpg" alt="HTML CSS">
+        <h4>HTML & CSS</h4>
+        <p>Build responsive pages and modern layouts.</p>
+        <button class="join-btn" onclick="enrollCourse('HTML & CSS')">Join Now</button>
+      </div>
+      <div class="course-card">
+        <img src="/Frontend/images/java.jpg" alt="Java Programming">
+        <h4>Java Programming</h4>
+        <p>Object-oriented programming and core APIs.</p>
+        <button class="join-btn" onclick="enrollCourse('Java Programming')">Join Now</button>
+      </div>
+
+      <div class="course-card">
+        <img src="/Frontend/images/C.jpeg" alt="C Language">
+        <h4>C Language</h4>
+        <p>Understand low-level programming and logic using C.</p>
+        <button class="join-btn" onclick="enrollCourse('C Language')">Join Now</button>
+      </div>
+      <div class="course-card">
+        <img src="/Frontend/images/C++.jpeg" alt="C++">
+        <h4>C++ Programming</h4>
+        <p>Advance your coding skills with OOP concepts in C++.</p>
+        <button class="join-btn" onclick="enrollCourse('C++ Programming')">Join Now</button>
+      </div>
+      <div class="course-card">
+        <img src="/Frontend/images/React_Fundamentals.png" alt="React JS">
+        <h4>React JS</h4>
+        <p>Build modern, interactive web interfaces with React.</p>
+        <button class="join-btn" onclick="enrollCourse('React JS')">Join Now</button>
+      </div>
+      <div class="course-card">
+        <img src="/Frontend/images/NODEJS.jpg" alt="NodeJS">
+        <h4>Node.js</h4>
+        <p>Develop scalable backend systems using Node.js.</p>
+        <button class="join-btn" onclick="enrollCourse('Node.js')">Join Now</button>
+      </div>
+
+      <div class="course-card">
+        <img src="/Frontend/images/software.jpg" alt="Software Engineering">
+        <h4>Software Engineering</h4>
+        <p>Learn SDLC, project management, and design principles.</p>
+        <button class="join-btn" onclick="enrollCourse('Software Engineering')">Join Now</button>
+      </div>
+      <div class="course-card">
+        <img src="/Frontend/images/FinTech.png" alt="FinTech">
+        <h4>FinTech</h4>
+        <p>Explore financial technologies and data-driven innovation.</p>
+        <button class="join-btn" onclick="enrollCourse('FinTech')">Join Now</button>
+      </div>
+      <div class="course-card">
+        <img src="/Frontend/images/IoT.png" alt="IoT">
+        <h4>Internet of Things</h4>
+        <p>Learn about connected devices and IoT ecosystems.</p>
+        <button class="join-btn"onclick="enrollCourse('Internet of Things')">Join Now</button>
+      </div>
+      <div class="course-card">
+        <img src="/Frontend/images/ds.jpg" alt="Data Security">
+        <h4>Data Security</h4>
+        <p>Understand cybersecurity principles and best practices.</p>
+        <button class="join-btn" onclick="enrollCourse('Data Security')">Join Now</button>
+      </div>
+    </div>
+  </div>
+
+ <script>
+ 
+const themeToggle = document.getElementById("theme-toggle");
+
+themeToggle.addEventListener("click", () => {
+  document.body.classList.toggle("dark-mode");
+
+  // Change icon dynamically
+  if (document.body.classList.contains("dark-mode")) {
+    themeToggle.classList.remove("ri-moon-line");
+    themeToggle.classList.add("ri-sun-line");
+  } else {
+    themeToggle.classList.remove("ri-sun-line");
+    themeToggle.classList.add("ri-moon-line");
+  }
+});
+ const profileBtn = document.getElementById('profileBtn');
+    const dropdown = document.getElementById('profileDropdown');
+    profileBtn.addEventListener('click', () => {
+      dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+      profileBtn.classList.toggle('active');
+    });
+    window.addEventListener('click', (e) => {
+      if (!profileBtn.contains(e.target)) {
+        dropdown.style.display = 'none';
+        profileBtn.classList.remove('active');
+      }
+    });
+    document.addEventListener("DOMContentLoaded", () => {
+  const username = localStorage.getItem("username");
+  const profileNameSpan = document.querySelector("#profileName");
+  const circle = document.querySelector(".t-icon");
+
+  if (username) {
+
+    // Update profile name text
+    profileNameSpan.textContent = username;
+
+    // Update circle with first letter
+    circle.textContent = username.charAt(0).toUpperCase();
+  } else {
+    window.location.href = "/Frontend/login&sgnup/login_form.html";
+  }
+});
+
+    // Dropdown toggle functionality
+    const dropdowns = document.querySelectorAll('.dropdown-btn');
+    dropdowns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const container = btn.nextElementSibling;
+        const arrow = btn.querySelector('.arrow');
+
+        container.style.display = container.style.display === 'block' ? 'none' : 'block';
+        arrow.classList.toggle('rotate');
+      });
+    });
+  </script>
+  <script>
+async function enrollIfNeeded(courseName) {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    alert("Please log in first!");
+    window.location.href = "/Frontend/login&signup/login_form.html";
+    return;
+  }
+
+  try {
+    // First, check if user is already enrolled
+    const resCheck = await fetch(`http://127.0.0.1:5000/api/progress/courses`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const courses = await resCheck.json();
+
+    const isAlreadyEnrolled = courses.some(c => c.courseName === courseName);
+
+    if (isAlreadyEnrolled) {
+      console.log("✅ Already enrolled — opening course directly");
+      return; // stop here, don't enroll again
+    }
+
+    // If not enrolled yet, enroll now
+    const res = await fetch("http://127.0.0.1:5000/api/progress/enroll", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ courseName }),
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      alert("✅ Enrolled successfully!");
+    } else {
+      alert("❌ " + (data.message || "Enrollment failed"));
+    }
+
+  } catch (err) {
+    console.error("Error:", err);
+    alert("Server error while enrolling");
+  }
+}
+
+  
+</script>
+ <script src="/Frontend/js/logout.js"></script>
+<script src="/Frontend/js/deleteAccount.js"></script>
+<script src="/Frontend/js/authProtect.js"></script>
+<script src="/Frontend/js/dashboardUser.js"></script>
+</body>
+</html>

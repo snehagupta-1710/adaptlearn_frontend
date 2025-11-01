@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AdaptLearn Progress</title>
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+<style>
+  .course-card {
+  background: #fafafa;
+  padding: 16px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 3px rgba(0,0,0,0.1);
+}
+
+.course-title {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.topics {
+  margin-top: 10px;
+  padding-left: 10px;
+}
+
+.topic-row {
+  margin-bottom: 10px;
+}
+
+  :root { font-size:18px; }
+  body {
+    margin:0;
+    font-family: 'Comic Sans MS', cursive;
+    background:#fafafa;
+    color:#111;
+    transition: background 0.3s, color 0.3s;
+  }
+  body.dark-mode { background:#121212; color:#eaeaea; }
+
+ 
+  /* Sidebar */
+  .sidebar {
+    z-index: 1001;
+    overflow: hidden;
+    width: 180px;
+    background-color: #ffffff;
+    border-right: 2px solid rgba(0,0,0,0.1);
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+  }
+  .sidebar .logo { width:130px; height:40px; display:block; margin:0 auto 20px 10px; }
+  .sidebar .logo img { width:130px; height:40px; display:block; }
+  .sidebar ul { list-style:none; }
+  .sidebar ul li { padding: 7px 5px; cursor:pointer; border-radius:6px; margin-left:-40px; color:#333; }
+  .sidebar ul li.active a {
+    display:block;
+    border:2px solid #763bbb;
+    padding:10px 5px;
+    margin-left:-9px;
+    border-radius:6px;
+    background:#763bbb;
+    color:#fff;
+  }
+  .sidebar a { text-decoration:none; color:#000; display:block; }
+  body.dark-mode .sidebar { background:#2a2a2a; border-color:#444; }
+  body.dark-mode .sidebar a { color:#ddd; }
+  body.dark-mode .sidebar ul li.active a { border-color:#c14ee1; background:#763bbb; color:#fff; }
+  /* Header */
+  .header {
+  background-color: #fff;
+  border-bottom: 2px solid rgba(0,0,0,0.1);
+  position: fixed;
+  top: 0;
+  left: 220px;
+  right: 0;
+  height: 60px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16px;
+  padding: 0 20px;
+  z-index: 10;
+}
+
+.t-icon {
+  background: #763bbb;
+  color: #fff;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 18px;
+  cursor: default;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+}
+
+.profile i {
+  font-size: 18px;
+  transition: transform 0.3s;
+}
+
+.profile.active i {
+  transform: rotate(180deg);
+}
+
+.profile-dropdown {
+  display: none;
+  position: absolute;
+  top: 45px;
+  right: 0;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  overflow: hidden;
+  min-width: 150px;
+  z-index: 10;
+}
+
+.profile-dropdown a {
+  display: block;
+  padding: 10px 14px;
+  color: #111;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.profile-dropdown a:hover {
+  background: #d9b3ff;
+  color: #4a148c;
+}
+
+/* Dark mode */
+body.dark-mode .header {
+  background: #2a2a2a;
+  color: #fff;
+}
+
+body.dark-mode .profile-dropdown {
+  background: #2a2a2a;
+  border-color: #444;
+}
+
+body.dark-mode .profile-dropdown a {
+  color: #eaeaea;
+}
+
+body.dark-mode .profile-dropdown a:hover {
+  background: #763bbb;
+  color: #fff;
+}
+/* Main Content */
+  .main { margin-left:220px; padding:80px 20px 20px 20px; }
+
+  h3 { font-size:1.3rem; margin-bottom:16px; }
+
+  /* Course Card */
+  .course-card {
+    background:#fff; border-radius:12px; padding:16px; margin-bottom:20px;
+    box-shadow:0 6px 18px rgba(0,0,0,0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  body.dark-mode .course-card { background:#1e1e1e; }
+  .course-card:hover { transform:translateY(-3px); box-shadow:0 8px 22px rgba(0,0,0,0.15); }
+  .course-card h4 { cursor:pointer; display:flex; justify-content:space-between; align-items:center; font-size:1.2rem; margin:0 0 8px 0; }
+
+  /* Progress Bar */
+  .progress-bar {
+    background:#e0e0e0; border-radius:12px; overflow:hidden; height:16px; margin:6px 0;
+  }
+  body.dark-mode .progress-bar { background:#444; }
+  .progress-fill {
+    height:100%; text-align:right; padding-right:6px; font-size:0.85rem; line-height:16px; color:#fff; font-weight:600;
+    border-radius:12px;
+  }
+  .progress-fill.complete { background:#8f6bff; }
+  .progress-fill.progress { background:#ffd64d; color:#111; }
+
+  /* Topics */
+  .topics { margin-top:12px; display:none; }
+  .topics div { margin-bottom:8px; }
+.progress-fill {
+  height: 100%;
+  text-align: right;
+  padding-right: 6px;
+  font-size: 0.85rem;
+  line-height: 16px;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 12px;
+  width: 0; /* start at 0 for animation */
+  transition: width 1.2s ease-in-out; /* smooth filling effect */
+}
+
+  /* Responsive */
+  @media (max-width:800px) { .main { margin-left:0; padding:100px 20px 20px 20px; } .header { left:0; } .sidebar{display:none;} }
+</style>
+</head>
+<body>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo"><img src="/Frontend/images/logo.png" alt="Logo"></div>
+    <ul>
+      <li><a href="/Frontend/home_page/index.html"><i class="ri-home-4-line"></i> Home</a></li>
+      <li><a href="/Frontend/course/index.html"><i class="ri-book-2-line"></i> Courses</a></li>
+      <li class="active"><a href="/Frontend/progress_page/index.html"><i class="ri-bar-chart-line"></i> Progress</a></li>
+    </ul>
+  </aside>
+
+  <!-- Header -->
+  <header class="header">
+  <i id="theme-toggle" class="ri-moon-line" title="Toggle theme"></i>
+
+  <i class="ri-notification-3-line" title="Notifications"></i>
+
+  <div class="t-icon">U</div> <!-- Will show user's first letter -->
+
+  <div class="profile" id="profileBtn">
+    <span id="profileName"></span>
+    <i class="ri-arrow-down-s-line"></i>
+
+    <div class="profile-dropdown" id="profileDropdown">
+      <a href="/Frontend/js/logout.js">Logout</a>
+      <a href="/Frontend/js/deleteAccount.js">Delete Account</a>
+    </div>
+  </div>
+</header>
+
+
+
+  <!-- Main -->
+  <div class="main">
+    <h3>My Progress</h3>
+  <div id="progressContainer"></div>
+  
+   
+  </div>
+</div>
+<script>
+ 
+const themeToggle = document.getElementById("theme-toggle");
+
+themeToggle.addEventListener("click", () => {
+  document.body.classList.toggle("dark-mode");
+
+  // Change icon dynamically
+  if (document.body.classList.contains("dark-mode")) {
+    themeToggle.classList.remove("ri-moon-line");
+    themeToggle.classList.add("ri-sun-line");
+  } else {
+    themeToggle.classList.remove("ri-sun-line");
+    themeToggle.classList.add("ri-moon-line");
+  }
+});
+ const profileBtn = document.getElementById('profileBtn');
+    const dropdown = document.getElementById('profileDropdown');
+    profileBtn.addEventListener('click', () => {
+      dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+      profileBtn.classList.toggle('active');
+    });
+    window.addEventListener('click', (e) => {
+      if (!profileBtn.contains(e.target)) {
+        dropdown.style.display = 'none';
+        profileBtn.classList.remove('active');
+      }
+    });
+    document.addEventListener("DOMContentLoaded", () => {
+  const username = localStorage.getItem("username");
+  const profileNameSpan = document.querySelector("#profileName");
+  const circle = document.querySelector(".t-icon");
+
+  if (username) {
+
+    // Update profile name text
+    profileNameSpan.textContent = username;
+
+    // Update circle with first letter
+    circle.textContent = username.charAt(0).toUpperCase();
+  } else {
+    window.location.href = "/Frontend/login&signup/login_form.html";
+  }
+});
+
+    // Dropdown toggle functionality
+    const dropdowns = document.querySelectorAll('.dropdown-btn');
+    dropdowns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const container = btn.nextElementSibling;
+        const arrow = btn.querySelector('.arrow');
+
+        container.style.display = container.style.display === 'block' ? 'none' : 'block';
+        arrow.classList.toggle('rotate');
+      });
+    });
+
+</script>
+    <script src="/Frontend/js/logout.js"></script>
+<script src="/Frontend/js/deleteAccount.js"></script>
+<script src="/Frontend/js/authProtect.js"></script>
+<script src="/Frontend/js/progressPage.js" defer></script>
+</body>
+</html>

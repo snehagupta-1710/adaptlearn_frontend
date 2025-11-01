@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+  <title>Sql Commands</title>
+  <style>
+     .button-class {
+    background-color:black; /* Baby pink theme */
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 8px;
+    cursor: pointer;
+    border-radius: 50px;
+    
+    /* Fixing the button position */
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    
+    /* Eye-catching effects */
+    box-shadow: 0 4px 15px rgba(255, 105, 180, 0.6);
+    transition: all 0.3s ease-in-out;
+    
+    /* Subtle animation */
+    animation: pulse 1.5s infinite;
+}
+
+/* Hover effect */
+.button-class:hover {
+    background-color: #763bbb; /* Darker pink */
+    box-shadow: 0 6px 20px rgba(177, 71, 234, 0.8);
+    transform: scale(1.1);
+}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: cursive;
+    }
+
+    li a {
+      text-decoration: none;
+      color: #000;
+    }
+    a {
+      text-decoration: none;
+      color: white;
+    }
+
+ /* Sidebar */
+  .sidebar { position: fixed; top: 0; bottom: 0; width: 220px; background-color: #fff; border-right: 2px solid rgba(0,0,0,0.1); padding: 0 0 20px 0; z-index: 1001; display: flex; flex-direction: column; }
+  .logo { height: 60px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-bottom: 10px; }
+  .logo img { width: 130px; height: 40px; display: block; }
+  .sidebar-menu { flex: 1; overflow-y: auto; -ms-overflow-style: none; scrollbar-width: none; }
+  .sidebar-menu::-webkit-scrollbar { display: none; }
+  .sidebar-menu ul { list-style: none; padding: 0 10px; }
+  .sidebar-menu ul li { border-radius: 6px; margin-bottom: 5px; }
+  .dropdown-btn { display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; cursor: pointer; background: #f7f7f7; border-radius: 6px; font-weight: bold; transition: all 0.3s; }
+  .dropdown-btn:hover { background: #763bbb; color: #fff; }
+  .dropdown-btn.active { background: #763bbb; color: #fff; }
+  .arrow { transition: transform 0.3s; }
+  .rotate { transform: rotate(90deg); }
+  .dropdown-container { display: none; padding-left: 10px; margin-top: 5px; }
+  .dropdown-container a { display: block; padding: 6px 10px; border-radius: 6px; background: #f0f0f0; color: #333; text-decoration: none; margin-bottom: 3px; transition: all 0.2s; }
+  .dropdown-container a:hover { background: #f0ebff; color: #763bbb; }
+  .dropdown-container a.active { background: #763bbb; color: #fff; }
+  body.dark-mode .sidebar { background-color: #2a2a2a; border-color: #444; color: #2a2a2a; }
+
+    /* Dark mode dropdown links */
+    body.dark-mode .dropdown-container a {
+      background: #333;
+      color: #ddd;
+    }
+
+    body.dark-mode .dropdown-container a:hover {
+      background: #763bbb;
+      color: #fff;
+    }
+
+    /* Active dropdown link in dark mode */
+    body.dark-mode .dropdown-container a.active {
+      background: #763bbb;
+      color: white;
+    }
+
+    /* Main Content */
+    body {
+      display: flex;
+      height: 100vh;
+      background-color: #fff;
+      color: #000;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .main-content {
+      margin-left: 240px;
+      margin-top: 10px;
+      width: calc(100% - 240px);
+      padding: 20px 40px;
+      overflow-y: auto;
+    }
+
+   .header {
+  background-color: #fff;
+  border-bottom: 2px solid rgba(0,0,0,0.1);
+  position: fixed;
+  top: 0;
+  left: 220px;
+  right: 0;
+  height: 60px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16px;
+  padding: 0 20px;
+  z-index: 10;
+}
+
+.t-icon {
+  background: #763bbb;
+  color: #fff;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 18px;
+  cursor: default;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+}
+
+.profile i {
+  font-size: 18px;
+  transition: transform 0.3s;
+}
+
+.profile.active i {
+  transform: rotate(180deg);
+}
+
+.profile-dropdown {
+  display: none;
+  position: absolute;
+  top: 45px;
+  right: 0;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  overflow: hidden;
+  min-width: 150px;
+  z-index: 10;
+}
+
+.profile-dropdown a {
+  display: block;
+  padding: 10px 14px;
+  color: #111;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.profile-dropdown a:hover {
+  background: #d9b3ff;
+  color: #4a148c;
+}
+
+/* Dark mode */
+body.dark-mode .header {
+  background: #2a2a2a;
+  color: #fff;
+}
+
+body.dark-mode .profile-dropdown {
+  background: #2a2a2a;
+  border-color: #444;
+}
+
+body.dark-mode .profile-dropdown a {
+  color: #eaeaea;
+}
+
+body.dark-mode .profile-dropdown a:hover {
+  background: #763bbb;
+  color: #fff;
+}
+
+
+    body.dark-mode .sidebar ul li .dropdown-btn .active {
+      color: #2a2a2a;
+    }
+
+    .content h1 {
+      margin-top: 30px;
+      margin-bottom: 10px;
+    }
+.content h2{
+  padding:14px 0px;
+}
+.content h3{
+  padding: 10px 0px;
+}
+.content ul li{
+  padding:4px 0px;
+}
+    .content p {
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+
+    .video-section {
+      margin: 25px 0;
+    }
+
+    .video-box {
+      border: 2px solid #af75f1;
+      border-radius: 10px;
+      padding: 10px;
+      background-color: #f6f0ff;
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+
+    .example-section {
+      margin-top: 25px;
+    }
+
+    .example-box {
+      background-color: #f6f0ff;
+      padding: 15px;
+      border-radius: 10px;
+      border: 2px solid #af75f1;
+      margin-top: 10px;
+      padding-left: 26px;
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+
+    .quiz-btn {
+      background-color: #763bbb;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 25px;
+      transition: background-color 0.3s;
+    }
+
+    .quiz-btn:hover {
+      background-color: #995edd;
+    }
+
+    /* Dark Mode */
+    body.dark-mode {
+      background-color: #1e1e1e;
+      color: #f5f5f5;
+    }
+
+    body.dark-mode header {
+      color: white;
+      background-color: #2a2a2a;
+    }
+
+    body.dark-mode .sidebar {
+      background-color: #2a2a2a;
+      border-color: #444;
+      color: #2a2a2a;
+    }
+
+    body.dark-mode .sidebar ul li.active {
+      color: #fff;
+      background: #763bbb;
+      border-color: #c14ee1;
+    }
+
+    body.dark-mode .sidebar ul li a {
+      color: #fff;
+    }
+
+    body.dark-mode .video-box,
+    body.dark-mode .example-box {
+      background-color: #2b2b2c;
+      border-color: #763bbb;
+    }
+
+    body.dark-mode .quiz-btn {
+      background-color: #763bbb;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    /* Dark mode adjustments for dropdown */
+    body.dark-mode .drop-btn {
+      color: #ddd;
+    }
+
+    body.dark-mode .drop-btn:hover {
+      color: #caa0ff;
+    }
+
+    body.dark-mode .sidebar .dropdown li a {
+      color: #ddd;
+    }
+
+    .active {
+      background: #763bbb;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+     <aside class="sidebar">
+  <!-- Logo stays fixed -->
+  <div class="logo">
+    <img class="logo" src="/Frontend/images/logo.png">
+  </div>
+
+  <!-- Scrollable menu -->
+  <div class="sidebar-menu">
+    <ul>
+      <li>
+        <div class="dropdown-btn">Introduction to Database <span class="arrow">▶</span></div>
+        <div class="dropdown-container">
+          <a href="/Frontend/beginner/topic_1.html">Beginner</a>
+          <a href="/Frontend/intermediate/topic_1.html">Intermediate</a>
+          <a href="/Frontend/advanced/topic_1.html">Advanced</a>
+        </div>
+      </li>
+
+      <li>
+        <div class="dropdown-btn">DBMS <span class="arrow">▶</span></div>
+        <div class="dropdown-container">
+          <a href="/Frontend/beginner/topic_2.html">Beginner</a>
+          <a href="/Frontend/intermediate/topic_2.html">Intermediate</a>
+          <a href="/Frontend/advanced/topic_2.html">Advanced</a>
+        </div>
+      </li>
+
+      <li>
+        <div class="dropdown-btn">RDBMS <span class="arrow">▶</span></div>
+        <div class="dropdown-container">
+          <a href="/Frontend/beginner/topic_3.html">Beginner</a>
+          <a href="/Frontend/intermediate/topic_3.html">Intermediate</a>
+          <a href="/Frontend/advanced/topic_3.html">Advanced</a>
+        </div>
+      </li>
+
+      <li>
+        <div class="dropdown-btn">Types of Keys <span class="arrow">▶</span></div>
+        <div class="dropdown-container">
+          <a href="/Frontend/beginner/topic_4.html">Beginner</a>
+          <a href="/Frontend/intermediate/topic_4.html">Intermediate</a>
+          <a href="/Frontend/advanced/topic_4.html">Advanced</a>
+        </div>
+      </li>
+
+      <li>
+        <div class="dropdown-btn active">SQL Commands <span class="arrow">▶</span></div>
+        <div class="dropdown-container">
+          <a href="/Frontend/beginner/topic_5.html"  class="active">Beginner</a>
+          <a href="/Frontend/intermediate/topic_5.html">Intermediate</a>
+          <a href="/Frontend/advanced/topic_5.html">Advanced</a>
+        </div>
+      </li>
+
+      <li>
+        <div class="dropdown-btn">Joins <span class="arrow">▶</span></div>
+        <div class="dropdown-container">
+          <a href="/Frontend/beginner/topic_6.html">Beginner</a>
+          <a href="/Frontend/intermediate/topic_6.html">Intermediate</a>
+          <a href="/Frontend/advanced/topic_6.html">Advanced</a>
+        </div>
+      </li>
+
+      <li>
+        <div class="dropdown-btn">Table, Rows, Command <span class="arrow">▶</span></div>
+        <div class="dropdown-container">
+          <a href="/Frontend/beginner/topic_7.html">Beginner</a>
+          <a href="/Frontend/intermediate/topic_7.html">Intermediate</a>
+          <a href="/Frontend/advanced/topic_7.html">Advanced</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</aside>
+
+   <header class="header">
+  <i id="theme-toggle" class="ri-moon-line" title="Toggle theme"></i>
+
+  <i class="ri-notification-3-line" title="Notifications"></i>
+
+  <div class="t-icon">U</div> <!-- Will show user's first letter -->
+
+  <div class="profile" id="profileBtn">
+    <span id="profileName"></span>
+    <i class="ri-arrow-down-s-line"></i>
+
+    <div class="profile-dropdown" id="profileDropdown">
+      <a href="/Frontend/js/logout.js">Logout</a>
+      <a href="/Frontend/js/deleteAccount.js">Delete Account</a>
+      <a href="/Frontend/home_page/index.html">Home Page</a>
+    </div>
+  </div>
+</header>
+
+   <!-- Main Content -->
+        <main class="main-content">
+      
+            <section class="content">
+                 <h1>SQL Commands </h1>
+
+    <p>
+        <b>SQL (Structured Query Language)</b> is the language used to communicate with databases. 
+        Think of a database as a digital notebook or a smart filing cabinet. SQL lets you write instructions to: 
+        <b>create, read, update, or delete information</b>.  
+        These instructions are called <b>SQL commands</b>.
+    </p>
+
+    <p>
+        For example, imagine you run a school and want to manage student information. 
+        You need to <b>add new students, update their class, see who is enrolled, or remove students who left</b>. 
+        SQL commands help you do all of this easily and quickly.
+    </p>
+
+    <h2>Categories of SQL Commands</h2>
+
+    <h3>1. Data Definition Language (DDL)</h3>
+    <p>
+        DDL commands help you define the structure of your database. 
+        Think of this as designing your notebook: creating pages (tables), adding columns, or removing old pages.
+    </p>
+
+    <ul>
+        <li><b>CREATE:</b> Make a new table or database.</li>
+        <li><b>ALTER:</b> Change a table, like adding a new column for phone numbers or changing column names.</li>
+        <li><b>DROP:</b> Delete a table or database completely. Use carefully, data is lost forever!</li>
+        <li><b>TRUNCATE:</b> Remove all data in a table but keep the table structure.</li>
+    </ul>
+
+    <p><b>Example:</b> Creating a table for students:</p>
+    <pre class="example-box">
+CREATE TABLE Students (
+  Student_ID INT PRIMARY KEY,
+  Name VARCHAR(50),
+  Class VARCHAR(10)
+);
+    </pre>
+    <p>
+        Here, <b>Student_ID</b> is unique for each student. Think of it like a student roll number. 
+        <b>Name</b> stores the student’s name, and <b>Class</b> stores which class the student is in.
+    </p>
+
+    <p><b>Example:</b> Adding a new column for email:</p>
+    <pre class="example-box">
+ALTER TABLE Students ADD Email VARCHAR(50);
+    </pre>
+
+    <h3>2. Data Manipulation Language (DML)</h3>
+    <p>
+        DML commands let you handle the data inside the tables. 
+        This is like filling your notebook with notes, editing them, or erasing some pages.
+    </p>
+
+    <ul>
+        <li><b>INSERT:</b> Add new data into a table.</li>
+        <li><b>UPDATE:</b> Change existing data.</li>
+        <li><b>DELETE:</b> Remove data from a table.</li>
+        <li><b>MERGE:</b> Combine data from two tables (used less often for beginners).</li>
+    </ul>
+
+    <p><b>Example:</b> Adding new students:</p>
+    <pre class="example-box">
+INSERT INTO Students VALUES (1, 'Sneha', '10A');
+INSERT INTO Students VALUES (2, 'Rohan', '9B');
+INSERT INTO Students VALUES (3, 'Priya', '10C');
+    </pre>
+
+    <p><b>Example:</b> Updating a student’s class:</p>
+    <pre>
+UPDATE Students
+SET Class='10B'
+WHERE Student_ID=1;
+    </pre>
+
+    <p><b>Example:</b> Removing a student:</p>
+    <pre class="example-box">
+DELETE FROM Students
+WHERE Student_ID=2;
+    </pre>
+
+    <h3>3. Data Query Language (DQL)</h3>
+    <p>
+        DQL commands let you <b>search and view data</b>.  
+        The main command is <b>SELECT</b>. It’s like asking your notebook: "Show me all students in Class 10A" or "Give me the email of Rohan".
+    </p>
+
+    <ul>
+        <li><b>SELECT:</b> View information from one or more tables.</li>
+    </ul>
+
+    <p><b>Example:</b> Show all students:</p>
+    <pre class="example-box">
+SELECT * FROM Students;
+    </pre>
+    <p>
+        The <b>*</b> means “all columns”.  
+        If you only want the name and class of students, you can write:
+    </p>
+    <pre>
+SELECT Name, Class FROM Students;
+    </pre>
+    <p>
+        You can also filter data using <b>WHERE</b>:
+    </p>
+    <pre class="example-box">
+SELECT Name, Class FROM Students
+WHERE Class='10A';
+    </pre>
+
+    <h3>4. Data Control Language (DCL)</h3>
+    <p>
+        DCL commands control who can use the database.  
+        Think of it like giving friends permission to read your notebook, write in it, or take notes.
+    </p>
+
+    <ul>
+        <li><b>GRANT:</b> Give permission to a user to access or change data.</li>
+        <li><b>REVOKE:</b> Take back permission.</li>
+    </ul>
+
+    <p><b>Example:</b></p>
+    <pre class="example-box">
+GRANT SELECT ON Students TO User1;  -- Allow user to see student data
+REVOKE SELECT ON Students FROM User1;  -- Remove access
+    </pre>
+
+    <h3>5. Transaction Control Language (TCL)</h3>
+    <p>
+        TCL commands help keep data correct and safe.  
+        Think of a transaction like making multiple edits in your notebook. You can save them all at once or undo them if something goes wrong.
+    </p>
+
+    <ul>
+        <li><b>COMMIT:</b> Save all changes permanently.</li>
+        <li><b>ROLLBACK:</b> Undo changes since the last save.</li>
+        <li><b>SAVEPOINT:</b> Set a checkpoint to return to if needed.</li>
+    </ul>
+
+    <p><b>Example:</b></p>
+    <pre class="example-box">
+SAVEPOINT Step1;  -- Create a checkpoint
+UPDATE Students SET Class='10C' WHERE Student_ID=3; -- Make a change
+ROLLBACK TO Step1;  -- Undo the change if needed
+COMMIT;  -- Save the final changes
+    </pre>
+
+    <div class="video-section">
+        <h2>Watch Video Explanation</h2>
+        <div class="video-box">
+            <iframe width="100%" height="315" 
+                     src="https://www.youtube.com/embed/vUj-kUEC_oA" 
+                    title="Beginner SQL Commands"
+                    frameborder="0"
+                    allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <div class="example-section">
+        <h2>Example: Step by Step</h2>
+        <div class="example-box">
+            <p>Suppose we have a school database. Here is what we can do with SQL:</p>
+            <ul>
+                <li><b>Create a table:</b>
+                    <pre>CREATE TABLE Students (Student_ID INT PRIMARY KEY, Name VARCHAR(50), Class VARCHAR(10));</pre>
+                </li>
+                <li><b>Add students:</b>
+                    <pre>INSERT INTO Students VALUES (1, 'Sneha', '10A');</pre>
+                </li>
+                <li><b>Update class:</b>
+                    <pre>UPDATE Students SET Class='10B' WHERE Student_ID=1;</pre>
+                </li>
+                <li><b>View all students:</b>
+                    <pre>SELECT * FROM Students;</pre>
+                </li>
+                <li><b>Delete a student:</b>
+                    <pre>DELETE FROM Students WHERE Student_ID=1;</pre>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="tip-section">
+        <h2>Tips for Beginners</h2>
+        <ul>
+            <li>Start with <b>CREATE, INSERT, SELECT, UPDATE, DELETE</b>. These are the most common commands.</li>
+            <li>Practice on a small database first, like Students or Products.</li>
+            <li>Use <b>SELECT</b> often to check your data after inserting or updating.</li>
+            <li>Think of tables as sheets in your notebook, rows as entries, and columns as the type of information.</li>
+            <li>Always save your work using <b>COMMIT</b> if you are doing multiple updates.</li>
+            <li>Use <b>ROLLBACK</b> when you make mistakes, it’s like an undo button.</li>
+        </ul>
+    </div>
+
+                <button class="quiz-btn"><a href="/Frontend/quiz/quiz_5.html">Take Quiz ▶</a></button>
+            </section>
+        </main>
+  </div>
+<button onclick="window.open('http://127.0.0.1:5000/', '_blank')">
+<img src="/Frontend/images/ai.png" class="button-class">
+</button>
+<script>
+ 
+const themeToggle = document.getElementById("theme-toggle");
+
+themeToggle.addEventListener("click", () => {
+  document.body.classList.toggle("dark-mode");
+
+  // Change icon dynamically
+  if (document.body.classList.contains("dark-mode")) {
+    themeToggle.classList.remove("ri-moon-line");
+    themeToggle.classList.add("ri-sun-line");
+  } else {
+    themeToggle.classList.remove("ri-sun-line");
+    themeToggle.classList.add("ri-moon-line");
+  }
+});
+ const profileBtn = document.getElementById('profileBtn');
+    const dropdown = document.getElementById('profileDropdown');
+    profileBtn.addEventListener('click', () => {
+      dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+      profileBtn.classList.toggle('active');
+    });
+    window.addEventListener('click', (e) => {
+      if (!profileBtn.contains(e.target)) {
+        dropdown.style.display = 'none';
+        profileBtn.classList.remove('active');
+      }
+    });
+    document.addEventListener("DOMContentLoaded", () => {
+  const username = localStorage.getItem("username");
+  const profileNameSpan = document.querySelector("#profileName");
+  const circle = document.querySelector(".t-icon");
+
+  if (username) {
+
+    // Update profile name text
+    profileNameSpan.textContent = username;
+
+    // Update circle with first letter
+    circle.textContent = username.charAt(0).toUpperCase();
+  } else {
+    window.location.href = "/Frontend/login&signup/login_form.html";
+  }
+});
+
+    // Dropdown toggle functionality
+    const dropdowns = document.querySelectorAll('.dropdown-btn');
+    dropdowns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const container = btn.nextElementSibling;
+        const arrow = btn.querySelector('.arrow');
+
+        container.style.display = container.style.display === 'block' ? 'none' : 'block';
+        arrow.classList.toggle('rotate');
+      });
+    });
+  </script>
+ <script src="/Frontend/js/logout.js"></script>
+<script src="/Frontend/js/deleteAccount.js"></script>
+<script src="/Frontend/js/authProtect.js"></script>
+<script src="/Frontend/js/dashboardUser.js"></script>
+
+</body>
+</html>

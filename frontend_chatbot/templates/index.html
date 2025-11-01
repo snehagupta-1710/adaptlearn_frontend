@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>AdaptLearn Chatbot</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>AdaptLearn — Study Buddy 🤖</h1>
+
+    <div id="chatbox"></div>
+
+    <div id="controls" class="flex-row">
+      <!-- Theme toggle -->
+      <button id="themeToggle">🌙 Dark Mode</button>
+
+      <!-- Subject dropdown -->
+      <select id="subject">
+        <option value="introduction_to_database">Introduction to Database</option>
+        <option value="dbms">DBMS</option>
+        <option value="rdbms">RDBMS</option>
+        <option value="types_of_keys">Types of Keys</option>
+        <option value="sql_commands">SQL Commands</option>
+        <option value="joins">Joins</option>
+        <option value="tables_rows_columns">Tables, Rows, Columns</option>
+      </select>
+
+      <!-- Message input and send button -->
+      <input id="message" placeholder="Type a message..."/>
+      <button id="sendBtn">Send</button>
+    </div>
+  </div>
+
+  
+<script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+
+</body>
+</html>
