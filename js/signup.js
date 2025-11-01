@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Redirect safely after a short delay
         setTimeout(() => {
-          window.location.href = "/Frontend/login&signup/login_form.html";
+          window.location.href = "login&signup/login_form.html";
         }, 800);
       } else {
         alert(data.message || "❌ Signup failed. Try again.");
@@ -73,7 +73,7 @@ document.getElementById("signupForm").addEventListener("submit", async (e) => {
       localStorage.setItem("email", data.user.email);
 
       // either redirect to dashboard or to login page
-      window.location.href = "/Frontend/home_page/index.html";
+      window.location.href = "home_page/index.html";
     } else {
       alert(data.message || "Signup failed");
     }

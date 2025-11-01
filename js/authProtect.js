@@ -5,6 +5,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // If no token, redirect user to login
   if (!token) {
     alert("Please login first to access this page.");
-    window.location.href = "/Frontend/login&signup/login_form.html";
+    window.location.href = "login&signup/login_form.html";
   }
 });

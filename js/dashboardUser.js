@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // 🔹 Redirect if user not logged in
   if (!username || !email) {
-    window.location.href = "/Frontend/login&signup/login_form.html";
+    window.location.href = "login&signup/login_form.html";
     return;
   }
 

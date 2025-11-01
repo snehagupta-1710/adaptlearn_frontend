@@ -110,11 +110,11 @@
 <body>
   <!-- Sidebar -->
    <aside class="sidebar">
-    <div class="logo"><img src="/Frontend/images/logo.png" alt="Logo"></div>
+    <div class="logo"><img src="images/logo.png" alt="Logo"></div>
     <ul>
-      <li><a href="/Frontend/home_page/index.html"><i class="ri-home-4-line"></i> Home</a></li>
-      <li class="active"><a href="/Frontend/course/index.html"><i class="ri-book-2-line"></i> Courses</a></li>
-      <li><a href="/Frontend/progress_page/index.html"><i class="ri-bar-chart-line"></i> Progress</a></li>
+      <li><a href="home_page/index.html"><i class="ri-home-4-line"></i> Home</a></li>
+      <li class="active"><a href="course/index.html"><i class="ri-book-2-line"></i> Courses</a></li>
+      <li><a href="progress_page/index.html"><i class="ri-bar-chart-line"></i> Progress</a></li>
     </ul>
   </aside>
   <!-- Header -->
@@ -130,8 +130,8 @@
     <i class="ri-arrow-down-s-line"></i>
 
     <div class="profile-dropdown" id="profileDropdown">
-      <a href="/Frontend/js/logout.js">Logout</a>
-      <a href="/Frontend/js/deleteAccount.js">Delete Account</a>
+      <a href="js/logout.js">Logout</a>
+      <a href="js/deleteAccount.js">Delete Account</a>
     </div>
   </div>
 </header>
@@ -141,77 +141,77 @@
     <h3>Our Courses</h3>
     <div class="courses">
       <div class="course-card">
-        <img src="/Frontend/images/dbms.jpg" alt="Data Fundamentals">
+        <img src="images/dbms.jpg" alt="Data Fundamentals">
         <h4>Database</h4>
         <p>Understand core database concepts and SQL basics.</p>
         <button class="join-btn" onclick="enrollCourse('Database')">
-          <a href="/Frontend/beginner/topic_1.html">Join Now</a></button>
-          <script src="/Frontend/js/courseActions.js"></script>
+          <a href="beginner/topic_1.html">Join Now</a></button>
+          <script src="js/courseActions.js"></script>
       </div>
       <div class="course-card">
-        <img src="/Frontend/images/python.webp" alt="Python Programming">
+        <img src="images/python.webp" alt="Python Programming">
         <h4>Python Programming</h4>
         <p>Practical Python for scripting and small projects.</p>
         <button class="join-btn"onclick="enrollCourse('Python Programming')">Join Now</button>
       </div>
       <div class="course-card">
-        <img src="/Frontend/images/HTMLCSS.jpg" alt="HTML CSS">
+        <img src="images/HTMLCSS.jpg" alt="HTML CSS">
         <h4>HTML & CSS</h4>
         <p>Build responsive pages and modern layouts.</p>
         <button class="join-btn" onclick="enrollCourse('HTML & CSS')">Join Now</button>
       </div>
       <div class="course-card">
-        <img src="/Frontend/images/java.jpg" alt="Java Programming">
+        <img src="images/java.jpg" alt="Java Programming">
         <h4>Java Programming</h4>
         <p>Object-oriented programming and core APIs.</p>
         <button class="join-btn" onclick="enrollCourse('Java Programming')">Join Now</button>
       </div>
 
       <div class="course-card">
-        <img src="/Frontend/images/C.jpeg" alt="C Language">
+        <img src="images/C.jpeg" alt="C Language">
         <h4>C Language</h4>
         <p>Understand low-level programming and logic using C.</p>
         <button class="join-btn" onclick="enrollCourse('C Language')">Join Now</button>
       </div>
       <div class="course-card">
-        <img src="/Frontend/images/C++.jpeg" alt="C++">
+        <img src="images/C++.jpeg" alt="C++">
         <h4>C++ Programming</h4>
         <p>Advance your coding skills with OOP concepts in C++.</p>
         <button class="join-btn" onclick="enrollCourse('C++ Programming')">Join Now</button>
       </div>
       <div class="course-card">
-        <img src="/Frontend/images/React_Fundamentals.png" alt="React JS">
+        <img src="images/React_Fundamentals.png" alt="React JS">
         <h4>React JS</h4>
         <p>Build modern, interactive web interfaces with React.</p>
         <button class="join-btn" onclick="enrollCourse('React JS')">Join Now</button>
       </div>
       <div class="course-card">
-        <img src="/Frontend/images/NODEJS.jpg" alt="NodeJS">
+        <img src="images/NODEJS.jpg" alt="NodeJS">
         <h4>Node.js</h4>
         <p>Develop scalable backend systems using Node.js.</p>
         <button class="join-btn" onclick="enrollCourse('Node.js')">Join Now</button>
       </div>
 
       <div class="course-card">
-        <img src="/Frontend/images/software.jpg" alt="Software Engineering">
+        <img src="images/software.jpg" alt="Software Engineering">
         <h4>Software Engineering</h4>
         <p>Learn SDLC, project management, and design principles.</p>
         <button class="join-btn" onclick="enrollCourse('Software Engineering')">Join Now</button>
       </div>
       <div class="course-card">
-        <img src="/Frontend/images/FinTech.png" alt="FinTech">
+        <img src="images/FinTech.png" alt="FinTech">
         <h4>FinTech</h4>
         <p>Explore financial technologies and data-driven innovation.</p>
         <button class="join-btn" onclick="enrollCourse('FinTech')">Join Now</button>
       </div>
       <div class="course-card">
-        <img src="/Frontend/images/IoT.png" alt="IoT">
+        <img src="images/IoT.png" alt="IoT">
         <h4>Internet of Things</h4>
         <p>Learn about connected devices and IoT ecosystems.</p>
         <button class="join-btn"onclick="enrollCourse('Internet of Things')">Join Now</button>
       </div>
       <div class="course-card">
-        <img src="/Frontend/images/ds.jpg" alt="Data Security">
+        <img src="images/ds.jpg" alt="Data Security">
         <h4>Data Security</h4>
         <p>Understand cybersecurity principles and best practices.</p>
         <button class="join-btn" onclick="enrollCourse('Data Security')">Join Now</button>
@@ -260,7 +260,7 @@ themeToggle.addEventListener("click", () => {
     // Update circle with first letter
     circle.textContent = username.charAt(0).toUpperCase();
   } else {
-    window.location.href = "/Frontend/login&sgnup/login_form.html";
+    window.location.href = "login&sgnup/login_form.html";
   }
 });
 
@@ -281,7 +281,7 @@ async function enrollIfNeeded(courseName) {
   const token = localStorage.getItem("token");
   if (!token) {
     alert("Please log in first!");
-    window.location.href = "/Frontend/login&signup/login_form.html";
+    window.location.href = "login&signup/login_form.html";
     return;
   }
 
@@ -325,9 +325,9 @@ async function enrollIfNeeded(courseName) {
 
   
 </script>
- <script src="/Frontend/js/logout.js"></script>
-<script src="/Frontend/js/deleteAccount.js"></script>
-<script src="/Frontend/js/authProtect.js"></script>
-<script src="/Frontend/js/dashboardUser.js"></script>
+ <script src="js/logout.js"></script>
+<script src="js/deleteAccount.js"></script>
+<script src="js/authProtect.js"></script>
+<script src="js/dashboardUser.js"></script>
 </body>
 </html>

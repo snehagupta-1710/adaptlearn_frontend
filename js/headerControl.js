@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
       localStorage.clear();
       alert("You have been logged out!");
-      window.location.href = "/Frontend/login&signup/login_form.html";
+      window.location.href = "login&signup/login_form.html";
     });
   }
 
@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (res.ok) {
           alert("Account deleted successfully!");
           localStorage.clear();
-          window.location.href = "/Frontend/login&signup/signup_form.html";
+          window.location.href = "login&signup/signup_form.html";
         } else {
           alert(data.message || "Something went wrong.");
         }
