@@ -472,7 +472,7 @@ async function loadSummary() {
   if (!token) return;
 
   try {
-    const res = await fetch("http://localhost:5000/api/progress/summary", {
+    const res = await fetch("https://adaptlearn-backend.onrender.com/api/progress/summary", {
       headers: { Authorization: `Bearer ${token}` },
     });
     if (!res.ok) {

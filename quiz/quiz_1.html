@@ -410,7 +410,7 @@ async function saveQuizResult(score, total) {
   const topicName = document.title.replace("Quiz - ", "").trim();
 
   try {
-    const res = await fetch("http://localhost:5000/api/progress/update", {
+    const res = await fetch("https://adaptlearn-backend.onrender.com/api/progress/update", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
