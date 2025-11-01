@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!confirmDelete) return;
 
       try {
-        const res = await fetch("http://127.0.0.1:5000/api/auth/delete", {
+        const res = await fetch("https://adaptlearn-backend.onrender.com/api/auth/delete", {
           method: "DELETE",
           headers: { Authorization: `Bearer ${token}` },
         });

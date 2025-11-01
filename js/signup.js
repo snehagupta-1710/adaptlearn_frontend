@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       console.log("📤 Sending signup request to backend...");
 
-      const res = await fetch("http://localhost:5000/api/auth/signup", {
+      const res = await fetch("https://adaptlearn-backend.onrender.com/api/auth/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password }),
@@ -59,7 +59,7 @@ document.getElementById("signupForm").addEventListener("submit", async (e) => {
   const password = document.getElementById("password").value.trim();
 
   try {
-    const res = await fetch("http://localhost:5000/api/auth/signup", {
+    const res = await fetch("https://adaptlearn-backend.onrender.com/api/auth/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name, email, password }),

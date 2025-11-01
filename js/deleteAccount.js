@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       try {
-        const res = await fetch("http://localhost:5000/api/auth/delete", {
+        const res = await fetch("https://adaptlearn-backend.onrender.com/api/auth/delete", {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",

@@ -4,7 +4,7 @@ async function enrollCourse(courseName) {
   if (!token) return alert("Please login first");
 
   try {
-    const res = await fetch("http://localhost:5000/api/progress/enroll", {
+    const res = await fetch("https://adaptlearn-backend.onrender.com/api/progress/enroll", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

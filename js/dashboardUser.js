@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // 🔹 Fetch and display overall progress summary (home page)
   try {
-    const res = await fetch("http://localhost:5000/api/progress/summary", {
+    const res = await fetch("https://adaptlearn-backend.onrender.com/api/progress/summary", {
       headers: { Authorization: `Bearer ${token}` },
     });
 
@@ -67,7 +67,7 @@ async function loadUserProgress() {
   if (!token) return;
 
   try {
-    const res = await fetch("http://localhost:5000/api/progress/user", {
+    const res = await fetch("https://adaptlearn-backend.onrender.com/api/progress/user", {
       headers: { Authorization: `Bearer ${token}` },
     });
 

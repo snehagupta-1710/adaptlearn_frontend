@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (!container) return;
 
   try {
-    const res = await fetch("http://localhost:5000/api/progress/user", {
+    const res = await fetch("https://adaptlearn-backend.onrender.com/api/progress/user", {
       headers: { Authorization: `Bearer ${token}` },
     });
 
