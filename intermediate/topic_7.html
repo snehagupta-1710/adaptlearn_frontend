@@ -321,9 +321,66 @@ body.dark-mode .profile-dropdown a:hover {
       background: #763bbb;
       color: white;
     }
+    /* ===============================
+   MOBILE TOPIC PAGE SIDEBAR
+   =============================== */
+
+/* Hide hamburger on desktop */
+.menu-btn {
+  display: none;
+  font-size: 26px;
+  cursor: pointer;
+  color: #763bbb;
+  z-index: 3000;
+}
+
+/* Mobile & Tablet */
+@media (max-width: 800px) {
+
+  .menu-btn {
+    display: block;
+  }
+
+  .sidebar {
+    left: -260px;
+    transition: left 0.3s ease;
+    z-index: 2000;
+  }
+
+  .sidebar.active {
+    left: 0;
+background-color:white;
+color:black;
+  }
+
+  .header {
+    left: 0;
+    justify-content: space-between;
+  }
+
+  .main-content {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 1500;
+  }
+
+  .overlay.active {
+    display: block;
+  }
+}
+
+
   </style>
 </head>
-<body>
+<body><div class="overlay" id="overlay"></div>
+
   <div class="container">
     <!-- Sidebar -->
      <aside class="sidebar">
@@ -401,6 +458,8 @@ body.dark-mode .profile-dropdown a:hover {
   </div>
 </aside>
 <header class="header">
+  <i class="ri-menu-line menu-btn" id="menuBtn"></i>
+
   <i id="theme-toggle" class="ri-moon-line" title="Toggle theme"></i>
 
   <i class="ri-notification-3-line" title="Notifications"></i>
@@ -616,6 +675,29 @@ themeToggle.addEventListener("click", () => {
 <script src="../js/deleteAccount.js"></script>
 <script src="../js/authProtect.js"></script>
 <script src="../js/dashboardUser.js"></script>
+<script>
+const menuBtn = document.getElementById("menuBtn");
+const sidebar = document.querySelector(".sidebar");
+const overlay = document.getElementById("overlay");
+
+menuBtn.addEventListener("click", () => {
+  sidebar.classList.add("active");
+  overlay.classList.add("active");
+});
+
+overlay.addEventListener("click", () => {
+  sidebar.classList.remove("active");
+  overlay.classList.remove("active");
+});
+
+/* Close sidebar when a topic link is clicked */
+document.querySelectorAll(".sidebar a").forEach(link => {
+  link.addEventListener("click", () => {
+    sidebar.classList.remove("active");
+    overlay.classList.remove("active");
+  });
+});
+</script>
 
 </body>
 </html>
