@@ -468,3 +468,136 @@ background: #763bbb;
  border-radius: 50% 20% 60% 40%;
   transform: rotate(-10deg);
 }
+/* ================================
+   RESPONSIVE FIXES – MOBILE & TABLET
+   ================================ */
+
+/* Tablets */
+@media (max-width: 1024px) {
+
+  section {
+    padding: 120px 30px 60px;
+  }
+
+  .hero {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-text {
+    font-size: 22px;
+  }
+
+  .hero img {
+    width: 90%;
+    height: auto;
+    margin: 30px auto 0;
+  }
+
+  .learn-btn {
+    margin-left: 0;
+  }
+
+  .feature-boxes {
+    height: auto;
+  }
+
+  .about {
+    flex-direction: column;
+    text-align: center;
+    margin: 0;
+  }
+
+  .about p,
+  .about h1 {
+    margin-left: 0;
+  }
+
+  .about img {
+    margin: 30px auto;
+    height: auto;
+    max-width: 80%;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+
+  /* Header */
+  header {
+    flex-direction: column;
+    padding: 10px 20px;
+  }
+
+  header nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin: 10px 0;
+  }
+
+  header nav a {
+    margin: 0;
+    font-size: 15px;
+  }
+
+  .login-btn {
+    margin-top: 10px;
+  }
+
+  /* Sections */
+  section {
+    padding: 110px 20px 50px;
+  }
+
+  /* Hero */
+  .hero-text {
+    font-size: 18px;
+  }
+
+  .hero img {
+    width: 100%;
+  }
+
+  .learn-btn {
+    font-size: 16px;
+    padding: 10px 30px;
+  }
+
+  /* Features */
+  .feature-boxes {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .feature-box {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  /* Courses */
+  .course-card {
+    width: 100%;
+    height: auto;
+  }
+
+  .course-card img {
+    height: auto;
+  }
+
+  /* About */
+  .about-text pre {
+    white-space: normal;
+  }
+
+  /* Footer */
+  footer {
+    margin-top: 0;
+  }
+
+  /* Decorative shapes – hide on mobile */
+  .circle {
+    display: none;
+  }
+}

@@ -5,78 +5,153 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AdaptLearn Sign Up</title>
   <style>
+    * {
+        box-sizing: border-box;
+    }
+
     body {
-      overflow: hidden;
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      height: 100vh;
-      background: white;
-      font-family: cursive;
-      position: relative;
-      padding-left: 10%;
+        overflow: hidden;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        min-height: 100vh;
+        background: white;
+        font-family: cursive;
+        position: relative;
+        padding-left: 10%;
     }
+
     .purple-container {
-      position: absolute;
-      right: 10%;
-      top: 15px;
-      width: 430px;
-      height: 100%;
-      background: #763bbb;
-      border-top-left-radius: 200px;
-      border-top-right-radius: 200px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+        position: absolute;
+        right: 10%;
+        top: 0;
+        width: 430px;
+        height: 100%;
+        background: #763bbb;
+        border-top-left-radius: 200px;
+        border-top-right-radius: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
+
     .container {
-      width: 400px;
-      padding: 20px;
-      margin-top: -50px;
+        width: 400px;
+        margin: 70px;
+        padding: 20px;
+        margin-top: 80px;
+        z-index: 1;
     }
+
     .login-form {
-      background: rgba(255, 255, 255, 0.8);
-      padding: 10px;
-      border-radius: 10px;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
-      text-align: center;
-      margin-bottom: -55px;
+        background: white;
+        padding: 20px;
+        margin: 3px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+        text-align: center;
     }
+
     .login-form input {
-      width: 90%;
-      padding: 8px;
-      margin-bottom: 10px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
+        width: 90%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #d8c5ed;
+        border-radius: 8px;
     }
+
     .login-form button {
-      font-size: 16px;
-      width: 85%;
-      padding: 10px;
-      background: #763bbb;
-      margin-top: 10px;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
+        width: 85%;
+        padding: 10px;
+        margin-top: 10px;
+        background: #763bbb;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 15px;
     }
+
     .login-form button:hover {
-      background: #8f5ec7;
+        background: #9458d8;
     }
+
     .logo {
-      display: block;
-      margin: 0 auto 15px;
-      max-width: 150px;
+        display: block;
+        margin: 0 auto 15px;
+        max-width: 150px;
     }
+
+    .forgot-password {
+        display: block;
+        text-align: right;
+        color: #763bbb;
+        padding: 0px 15px 5px 0px;
+    }
+
     a {
-      color: #763bbb;
-      text-decoration: none;
+        color: #763bbb;
     }
+
     .image-section img {
-      margin-top: 250px;
-      height: 500px;
-      width: 450px;
+        max-width: 100%;
+        height: auto;
     }
+
+    /* =====================
+       TABLET RESPONSIVE
+       ===================== */
+    @media (max-width: 1024px) {
+        body {
+            padding-left: 5%;
+        }
+
+        .purple-container {
+            width: 300px;
+            right: 5%;
+        }
+
+        .image-section img {
+            height: 350px;
+        }
+    }
+
+    /* =====================
+       MOBILE RESPONSIVE
+       ===================== */
+    @media (max-width: 768px) {
+
+        body {
+            flex-direction: column;
+            padding: 20px;
+            justify-content: center;
+        }
+
+        .purple-container {
+            position: relative;
+            width: 100%;
+            height: 240px;
+            right: 0;
+            border-radius: 0 0 200px 200px;
+            margin-bottom: 20px;
+        }
+
+        .image-section img {
+            height: 180px;
+        }
+
+        .container {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .login-form {
+            width: 100%;
+        }
+    }
+</style>
+
   </style>
 </head>
 <body>
