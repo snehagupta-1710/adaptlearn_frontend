@@ -210,7 +210,7 @@ position: relative;
 .course-card p {
     font-size: 13px;
     margin: 10px 0;
-    font-family:cursive;
+    font-family:"Poppins", "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .join-btn {
@@ -271,7 +271,7 @@ position: relative;
     background-color: #763bbb;
     border-radius: 0px;
     border: 1px solid #ddd;
-    font-family: Arial, sans-serif;
+    font-family: "Poppins", "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
   #contact h1 {
