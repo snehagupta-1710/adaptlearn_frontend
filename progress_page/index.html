@@ -206,12 +206,74 @@ body.dark-mode .profile-dropdown a:hover {
   width: 0; /* start at 0 for animation */
   transition: width 1.2s ease-in-out; /* smooth filling effect */
 }
+/* ===============================
+   MOBILE DASHBOARD – COURSE PAGE
+   =============================== */
 
-  /* Responsive */
-  @media (max-width:800px) { .main { margin-left:0; padding:100px 20px 20px 20px; } .header { left:0; } .sidebar{display:none;} }
+/* Hide hamburger on desktop */
+.menu-btn {
+  display: none;
+  font-size: 26px;
+  cursor: pointer;
+  color: #763bbb;
+  z-index: 3000;
+}
+
+/* Mobile & Tablet */
+@media (max-width: 800px) {
+
+  .menu-btn {
+    display: block;
+  }
+
+  .sidebar {
+    position: fixed;
+    left: -260px;
+    top: 0;
+    width: 220px;
+    height: 100%;
+    transition: left 0.3s ease;
+    z-index: 2000;
+  }
+
+  .sidebar.active {
+    left: 0;
+  }
+
+  .header {
+    left: 0;
+    justify-content: space-between;
+  }
+
+  .main,
+  .main-content {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 1500;
+  }
+
+  .overlay.active {
+    display: block;
+  }
+
+  /* Course grid responsiveness */
+  .courses {
+    grid-template-columns: 1fr;
+  }
+}
+
 </style>
 </head>
 <body>
+  <div class="overlay" id="overlay"></div>
+
   <!-- Sidebar -->
   <aside class="sidebar">
     <div class="logo"><img src="../images/logo.png" alt="Logo"></div>
@@ -224,6 +286,7 @@ body.dark-mode .profile-dropdown a:hover {
 
   <!-- Header -->
   <header class="header">
+      <i class="ri-menu-line menu-btn" id="menuBtn"></i>
   <i id="theme-toggle" class="ri-moon-line" title="Toggle theme"></i>
 
   <i class="ri-notification-3-line" title="Notifications"></i>
@@ -313,5 +376,29 @@ themeToggle.addEventListener("click", () => {
 <script src="../js/deleteAccount.js"></script>
 <script src="../js/authProtect.js"></script>
 <script src="../js/progressPage.js" defer></script>
+<script>
+const menuBtn = document.getElementById("menuBtn");
+const sidebar = document.querySelector(".sidebar");
+const overlay = document.getElementById("overlay");
+
+menuBtn.addEventListener("click", () => {
+  sidebar.classList.add("active");
+  overlay.classList.add("active");
+});
+
+overlay.addEventListener("click", () => {
+  sidebar.classList.remove("active");
+  overlay.classList.remove("active");
+});
+</script>
+<script>
+document.querySelectorAll(".sidebar a").forEach(link => {
+  link.addEventListener("click", () => {
+    document.querySelector(".sidebar").classList.remove("active");
+    document.getElementById("overlay").classList.remove("active");
+  });
+});
+</script>
+
 </body>
 </html>

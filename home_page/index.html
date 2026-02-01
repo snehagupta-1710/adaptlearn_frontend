@@ -323,10 +323,120 @@ body.dark-mode .course-card h4{
   .course-card p { margin:0; font-size:0.95rem; opacity:0.95; }
 
   @media (max-width:1000px){ .courses{ grid-template-columns:repeat(2,1fr); } .overview{ flex-direction:column; } }
-  @media (max-width:600px){ .sidebar{ display:none } .main{ margin-left:0 } .courses{ grid-template-columns:1fr } }
+ @media (max-width:600px){ /* Mobile Sidebar */
+@media (max-width: 800px) {
+
+  .menu-btn {
+    display: block;
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  .sidebar {
+    position: fixed;
+    left: -260px;
+    top: 0;
+    width: 220px;
+    height: 100%;
+    transition: left 0.3s ease;
+    z-index: 2000;
+  }
+
+  .sidebar.active {
+    left: 0;
+  }
+
+  .header {
+    left: 0;
+  }
+
+  .main {
+    margin-left: 0;
+  }
+
+  .overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 1500;
+  }
+
+  .overlay.active {
+    display: block;
+  }
+}
+
+/* Hide menu icon on desktop */
+.menu-btn {
+  display: none;
+}
+ .main{ margin-left:0 } .courses{ grid-template-columns:1fr } }
+/* ===============================
+   MOBILE DASHBOARD FIX
+   =============================== */
+
+/* Hide hamburger on desktop */
+.menu-btn {
+  display: none;
+  font-size: 26px;
+  cursor: pointer;
+  color: #763bbb;
+  z-index: 3000;
+}
+
+/* Mobile & Tablet */
+@media (max-width: 800px) {
+
+  .menu-btn {
+    display: block;
+  }
+
+  .sidebar {
+    position: fixed;
+    left: -260px;
+    top: 0;
+    width: 220px;
+    height: 100%;
+    transition: left 0.3s ease;
+    z-index: 2000;
+  }
+
+  .sidebar.active {
+    left: 0;
+  }
+
+  .header {
+    left: 0;
+    justify-content: space-between;
+  }
+
+  .main {
+    margin-left: 0;
+  }
+
+  .overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 1500;
+  }
+
+  .overlay.active {
+    display: block;
+  }
+
+  .courses {
+    grid-template-columns: 1fr;
+  }
+}
+
 </style>
 </head>
 <body>
+  <div class="overlay" id="overlay"></div>
+
   <aside class="sidebar">
     <div class="logo"><img src="../images/logo.png" alt="Logo"></div>
     <ul>
@@ -337,6 +447,8 @@ body.dark-mode .course-card h4{
   </aside>
 
   <header class="header">
+    <i class="ri-menu-line menu-btn" id="menuBtn"></i>
+
   <i id="theme-toggle" class="ri-moon-line" title="Toggle theme"></i>
 
   <i class="ri-notification-3-line" title="Notifications"></i>
@@ -500,6 +612,29 @@ loadSummary();
 <script src="../js/deleteAccount.js"></script>
 <script src="../js/authProtect.js"></script>
 <script src="../js/dashboardUser.js"></script>
+<script>
+const menuBtn = document.getElementById("menuBtn");
+const sidebar = document.querySelector(".sidebar");
+const overlay = document.getElementById("overlay");
+
+menuBtn.addEventListener("click", () => {
+  sidebar.classList.add("active");
+  overlay.classList.add("active");
+});
+
+overlay.addEventListener("click", () => {
+  sidebar.classList.remove("active");
+  overlay.classList.remove("active");
+});
+</script>
+<script>
+document.querySelectorAll(".sidebar a").forEach(link => {
+  link.addEventListener("click", () => {
+    document.querySelector(".sidebar").classList.remove("active");
+    document.getElementById("overlay").classList.remove("active");
+  });
+});
+</script>
 
 </body>
 </html>
